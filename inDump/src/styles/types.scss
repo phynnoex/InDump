@@ -1,0 +1,6 @@
+$font-main: "Inter", sans-serif;
+
+// Line height “-2” is not valid CSS, 
+// so you probably mean *tighter* line spacing.
+// For tight spacing, use something like 0.9 or 1.0.
+$letter-spacing: -0.02em;
