@@ -1,0 +1,46 @@
+@use "../../../styles/colors.scss";
+
+.upload-image {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 16px;
+    gap: 12px;
+    border-radius: 8px;
+    border: 2px dashed black;
+    &_top{
+        padding: 16px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+    }
+
+}
+.selectImageContainer{
+    height: 48px;
+    width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: colors.$primary-grey;
+    border-radius: 4px;
+    
+}
+.selectImageText{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    h4{
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    p{
+        margin: 0;
+        font-size: 14px;
+        font-weight: 400;
+        color: rgb(136, 136, 136);
+    }
+}
