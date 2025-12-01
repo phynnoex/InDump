@@ -7,11 +7,34 @@ import { motion } from "framer-motion";
 import UploadModal from "./uploadModal";
 import { AnimatePresence } from "framer-motion";
 import UploadImage from "./uploadImage";
+import SelectSize from "./uploadImage/selectSize";
+import SelectCollageStyle from "./uploadImage/selectCollageStyle";
 
-
+type sizeOption = {
+    label: string;
+    width: number;
+    height: number;
+}
+type collageOptions = {
+    label: string;
+}
 
 export default function CollagePage() {
     const [isButtonClicked, setIsButtonClicked] = useState(false)
+    const sizeOptions: sizeOption[] = [
+        { label: "1:1", width: 1080, height: 1080 },
+        { label: "4:5", width: 1080, height: 1350 },
+        { label: "9:16", width: 1080, height: 1920 },
+    ]
+    const collageOptions: collageOptions[] = [
+        { label: "Grid" },
+        { label: "Freeform" },
+        { label: "Mosaic" },
+        { label: "Circular" },
+        { label: "Abstract" },
+        
+    ]
+
     return (
         <>
             <div className="collagePage">
@@ -37,6 +60,8 @@ export default function CollagePage() {
             </div>
             <AnimatePresence>{isButtonClicked ? <UploadModal setIsButtonClicked={setIsButtonClicked}>
                 <UploadImage />
+                <SelectSize sizeOptions={sizeOptions} />
+                <SelectCollageStyle collageOptions={collageOptions}></SelectCollageStyle>
             </UploadModal> : ""}
             </AnimatePresence>
         </>

@@ -1,13 +1,16 @@
 import { HugeiconsIcon } from "@hugeicons/react"
 import "./styles.scss"
-import { Upload01Icon, Upload04Icon } from "@hugeicons/core-free-icons"
+import { Upload04Icon } from "@hugeicons/core-free-icons"
 import SelectFileInput from "./selectFileInput"
 import { useState } from "react"
 import DisplayThumbnails from "./displayThumbnails"
 
+
+
 export default function UploadImage() {
 
     const [images, setImages] = useState<File[]>([])
+   
     return (
         <div className="upload-image">
             <div className="upload-image_top">

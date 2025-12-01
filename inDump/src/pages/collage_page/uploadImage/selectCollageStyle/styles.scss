@@ -1,0 +1,20 @@
+.select-collage-style{
+    margin: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    &_heading{
+        display: flex;
+        flex-direction: column;
+        h4{
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        p{
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+    }
+}
