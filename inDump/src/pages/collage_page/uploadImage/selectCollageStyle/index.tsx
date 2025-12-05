@@ -15,9 +15,10 @@ export default function SelectCollageStyle({collageOptions}: selectCollageStyleP
             </div>
             <div className="collage-style-options">
                 {collageOptions.map((option) => (
-                    <button key={option.label} className="collage-style-card">
+                    <div key={option.label} className="collage-style-card">
+                        <div className="icon_container"></div>
                         <span>{option.label}</span>
-                    </button>
+                    </div>
                 ))}
             </div>
         </div>

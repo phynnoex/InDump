@@ -1,3 +1,5 @@
+@use "../../../../styles/colors.scss";
+
 .select-collage-style{
     margin: none;
     display: flex;
@@ -17,4 +19,23 @@
             color: #666;
         }
     }
+}
+.collage-style-options{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    flex-wrap: wrap;
+    
+}
+
+.collage-style-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    min-width: 120px;
+    font-size: 14px;
+    border-radius: 4px;
+    background-color: colors.$primary-grey;
 }
