@@ -62,8 +62,9 @@ export default function CollagePage() {
                 <UploadImage />
                 <SelectSize sizeOptions={sizeOptions} />
                 <SelectCollageStyle collageOptions={collageOptions}></SelectCollageStyle>
+                <button className="collage-submit-button" >Generate Collage</button>
             </UploadModal> : ""}
             </AnimatePresence>
-        </>
+        </> 
     )
 }

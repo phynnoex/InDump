@@ -5,6 +5,7 @@
     margin: 0px;
     padding: 24px 16px;
     height: 100vh;
+    overflow-y: hidden;
 
     &_left {
         display: flex;
@@ -34,4 +35,13 @@
         border: none;
        
     }
+}
+
+.collage-submit-button{
+    background-color: colors.$primary-dark;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    height: 64px;
+    font-size: 16px;
 }

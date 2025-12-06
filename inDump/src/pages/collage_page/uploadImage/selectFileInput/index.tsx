@@ -1,13 +1,11 @@
 import { Album02Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import "./styles.scss"
-import { use, useState } from "react"
-
 type SelectFileInputProps = {
     images?: File[]
     setImages: (files: File[]) => void
 }
-export default function SelectFileInput({ images, setImages }: SelectFileInputProps) {
+export default function SelectFileInput({setImages }: SelectFileInputProps) {
 
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
