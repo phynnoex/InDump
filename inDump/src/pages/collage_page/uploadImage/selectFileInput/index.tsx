@@ -3,13 +3,15 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import "./styles.scss"
 type SelectFileInputProps = {
     images?: File[]
-    setImages: (files: File[]) => void
+    setImages: React.Dispatch<React.SetStateAction<File[]>>;
+
 }
 export default function SelectFileInput({setImages }: SelectFileInputProps) {
 
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setImages(Array.from(event.target.files || []))
+        const newFiles: File[] = Array.from(event.target.files || []);
+        setImages(prevFiles => [...prevFiles, ...newFiles]);
     }
     return (
         <div className="selectFileInput">

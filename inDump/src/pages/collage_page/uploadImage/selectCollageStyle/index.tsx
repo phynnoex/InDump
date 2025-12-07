@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import "./styles.scss"
+import { CollageContext } from "../../../../collageContext";
+
 
 type selectCollageStyleProps = {
     collageOptions: {
@@ -7,6 +10,12 @@ type selectCollageStyleProps = {
 }
 
 export default function SelectCollageStyle({collageOptions}: selectCollageStyleProps) {
+    const { setCollageStyle, collageStyle } = useContext(CollageContext);
+
+    const selectButtonHandler = (label: string) => {
+        setCollageStyle(label);
+    }
+
     return (
         <div className="select-collage-style">
             <div className="select-collage-style_heading">
@@ -15,7 +24,7 @@ export default function SelectCollageStyle({collageOptions}: selectCollageStyleP
             </div>
             <div className="collage-style-options">
                 {collageOptions.map((option) => (
-                    <div key={option.label} className="collage-style-card">
+                    <div key={option.label} className={`collage-style-card ${collageStyle === option.label ? "selected" : ""}`} onClick={() => selectButtonHandler(option.label)}>
                         <div className="icon_container"></div>
                         <span>{option.label}</span>
                     </div>

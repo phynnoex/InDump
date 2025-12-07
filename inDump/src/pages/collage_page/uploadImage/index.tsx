@@ -2,14 +2,15 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import "./styles.scss"
 import { Upload04Icon } from "@hugeicons/core-free-icons"
 import SelectFileInput from "./selectFileInput"
-import { useState } from "react"
 import DisplayThumbnails from "./displayThumbnails"
+import { useContext } from "react"
+import { CollageContext } from "../../../collageContext"
 
 
 
 export default function UploadImage() {
 
-    const [images, setImages] = useState<File[]>([])
+    const { images, setImages } = useContext(CollageContext)
    
     return (
         <div className="upload-image">
