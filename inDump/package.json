@@ -13,9 +13,12 @@
     "@hugeicons/core-free-icons": "^2.0.0",
     "@hugeicons/react": "^1.1.1",
     "framer-motion": "^12.23.24",
+    "konva": "^10.0.12",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "sass": "^1.94.2"
+    "react-konva": "^19.2.1",
+    "sass": "^1.94.2",
+    "use-image": "^1.1.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

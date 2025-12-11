@@ -7,9 +7,13 @@
     background-color: colors.$primary-grey;
     overflow: hidden;
     position: relative;
+    border: 2px solid rgb(197, 197, 197);
+    padding: 10px;
+    box-sizing: border-box;
     &_background{
         background-image: url(../../../assets/polkadot.png);
         background-size: cover;
         height: 100%;
+        
     }
 }
