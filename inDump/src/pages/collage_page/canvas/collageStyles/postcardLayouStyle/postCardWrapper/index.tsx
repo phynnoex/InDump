@@ -2,9 +2,6 @@ import { Group } from "react-konva";
 import PostCard from "../../../../../../components/postCard";
 import { useKonvaImage } from "../../../../../../hooks/useKonvaImage";
 
-
-PostCard
-
 export default function PostCardWrapper({ imageSrc, layout }: { imageSrc: File; layout: any }) {
   const { konvaImage } = useKonvaImage({ image: imageSrc });
 
@@ -12,6 +9,7 @@ export default function PostCardWrapper({ imageSrc, layout }: { imageSrc: File; 
 
   return (
     <Group
+    
       x={layout.x}
       y={layout.y}
       rotation={layout.rotation}
