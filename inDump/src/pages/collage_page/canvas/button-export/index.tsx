@@ -1,11 +1,10 @@
 
-import React, { useRef, useState } from "react"
+import React, {  useState } from "react"
 import { ArrowDown01FreeIcons, FileExportFreeIcons } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import "./styles.scss"
 import { motion } from "framer-motion";
 import Konva from "konva";
-import { div } from "framer-motion/client";
 
 type ButtonProps = {
     ArtboardRef: React.RefObject<{ getStage: () => Konva.Stage | null } | null>

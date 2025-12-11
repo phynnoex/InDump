@@ -1,5 +1,5 @@
-import { useContext, useEffect, useMemo, useState } from "react"
-import { Group, Image, Rect } from "react-konva"
+import { useContext, useMemo, } from "react"
+import { Image } from "react-konva"
 import { CollageContext } from "../../../../../collageContext"
 import { useKonvaImage } from "../../../../../hooks/useKonvaImage"
 import computeLayout from "../../../../../services/normalizeLayoutShapes/computeLyout"
