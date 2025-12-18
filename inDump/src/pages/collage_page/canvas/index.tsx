@@ -5,7 +5,6 @@ import { CollageContext } from "../../../collageContext";
 import Artboard from "./artboard";
 import { Group, Layer, Rect } from "react-konva";
 import type Konva from "konva";
-import PostCards from "./collageStyles/postcardLayouStyle/postCards";
 import GridStyle from "./collageStyles/postcardLayouStyle/Grid";
 
 export default function Canvas() {
