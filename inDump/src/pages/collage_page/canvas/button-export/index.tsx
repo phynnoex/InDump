@@ -22,7 +22,7 @@ export default function ButtonExport({ ArtboardRef }: ButtonProps) {
         }
         const dataURL = stage.toDataURL({
             mimeType: imageType,
-            pixelRatio: 1 // double resolution
+            pixelRatio: 2 // double resolution
         });
 
         const link = document.createElement('a');

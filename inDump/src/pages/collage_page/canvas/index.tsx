@@ -6,11 +6,12 @@ import Artboard from "./artboard";
 import { Group, Layer, Rect } from "react-konva";
 import type Konva from "konva";
 import PostCards from "./collageStyles/postcardLayouStyle/postCards";
+import GridStyle from "./collageStyles/postcardLayouStyle/Grid";
 
 export default function Canvas() {
   const { size } = useContext(CollageContext);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const ArtboardRef = useRef<{getStage:() => Konva.Stage | null}>(null)
+  const ArtboardRef = useRef<{ getStage: () => Konva.Stage | null }>(null)
   const [containerSize, setContainerSize] = useState({ w: 0, h: 0 });
 
   useLayoutEffect(() => {
@@ -31,7 +32,7 @@ export default function Canvas() {
 
   return (
     <div className="canvas" ref={containerRef}>
-      <ButtonExport ArtboardRef={ArtboardRef}/>
+      <ButtonExport ArtboardRef={ArtboardRef} />
       <div className="canvas_background">
         <div className="canvas-element">
           {size.width && size.height ? (
@@ -50,7 +51,7 @@ export default function Canvas() {
                     fill="white"
                     shadowBlur={1}
                   />
-                  <PostCards bgSize={{height:size.height, width:size.width}}/>
+                  <GridStyle canvasHeight={size.height} canvasWidth={size.width} />
                 </Group>
               </Layer>
             </Artboard>
