@@ -42,6 +42,7 @@ export default function GridComponent({ layout, imageSrc }: GridComponentProps) 
                     image={konvaImage}
                     width={fitWidth}
                     height={fitHeight}
+                    
                 />
             </Group>
         </>

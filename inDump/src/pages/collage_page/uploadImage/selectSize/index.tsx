@@ -1,6 +1,8 @@
-import { CollageContext } from "../../../../collageContext";
+import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss"
-import { useContext } from "react";
+
+import type { AppDispatch, RootState } from "../../../../state/store";
+import { setSize } from "../../../../state/collage/collageSlice";
 
 type SelectSizeProps = {
     sizeOptions: {
@@ -14,12 +16,11 @@ type SelectSizeProps = {
 
 
 export default function SelectSize({ sizeOptions }: SelectSizeProps) {
-    const { setSize, size } = useContext(CollageContext);
+    const size = useSelector((state: RootState) => state.size)
+    const dispatch = useDispatch<AppDispatch>()    // console.log(width, height)
+
     const selectButtonHandler = (width: number, height: number) => {
-        // console.log(width, height)
-        setSize(prev => ({
-            ...prev, width: width, height: height
-        }))
+        dispatch(setSize({ width: width, height: height }))
     }
 
     return (

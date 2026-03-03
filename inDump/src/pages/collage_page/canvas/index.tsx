@@ -3,12 +3,15 @@ import ButtonExport from "./button-export";
 import "./styles.scss";
 import { CollageContext } from "../../../collageContext";
 import Artboard from "./artboard";
-import { Group, Layer, Rect } from "react-konva";
+import { Group, Layer, Rect, Text } from "react-konva";
 import type Konva from "konva";
 import GridStyle from "./collageStyles/postcardLayouStyle/Grid";
 
+import { useSelector } from "react-redux";
+import type { RootState } from "../../../state/store";
+
 export default function Canvas() {
-  const { size } = useContext(CollageContext);
+  const size = useSelector((state: RootState) => state.size)
   const containerRef = useRef<HTMLDivElement | null>(null);
   const ArtboardRef = useRef<{ getStage: () => Konva.Stage | null }>(null)
   const [containerSize, setContainerSize] = useState({ w: 0, h: 0 });
@@ -51,6 +54,17 @@ export default function Canvas() {
                     shadowBlur={1}
                   />
                   <GridStyle canvasHeight={size.height} canvasWidth={size.width} />
+                  <Text
+                    text="Happy birthday"
+                    x={50}
+                    y={80}
+                    fontSize={50}
+                    draggable
+                    fill={"white"}
+                    shadowBlur={5}
+                    shadowColor="black"
+                  />
+
                 </Group>
               </Layer>
             </Artboard>
