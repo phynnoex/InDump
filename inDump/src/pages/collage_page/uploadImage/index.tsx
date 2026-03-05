@@ -3,15 +3,16 @@ import "./styles.scss"
 import { Upload04Icon } from "@hugeicons/core-free-icons"
 import SelectFileInput from "./selectFileInput"
 import DisplayThumbnails from "./displayThumbnails"
-import { useContext } from "react"
-import { CollageContext } from "../../../collageContext"
+
+import { useSelector } from "react-redux"
+import { type RootState } from "../../../state/store"
 
 
 
 export default function UploadImage() {
 
-    const { images, setImages } = useContext(CollageContext)
-   
+    const images = useSelector((state: RootState) => state.images)
+
     return (
         <div className="upload-image">
             <div className="upload-image_top">
@@ -27,7 +28,7 @@ export default function UploadImage() {
                 <div className="selectImageDescription"></div>
             </div>
             <div className="upload-image_middle">
-                <SelectFileInput images={images} setImages={setImages} />
+                <SelectFileInput images={images} />
             </div>
             <div className="upload-image_bottom">
                 <DisplayThumbnails images={images} />

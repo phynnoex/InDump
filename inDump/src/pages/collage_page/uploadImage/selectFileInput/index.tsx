@@ -1,17 +1,21 @@
 import { Album02Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
-import "./styles.scss"
+import "./styles.scss";
+import { setImage } from "../../../../state/collage/collageSlice"
+import { useDispatch } from "react-redux"
+import { type AppDispatch } from "../../../../state/store"
 type SelectFileInputProps = {
     images?: File[]
-    setImages: React.Dispatch<React.SetStateAction<File[]>>;
 
 }
-export default function SelectFileInput({setImages }: SelectFileInputProps) {
+export default function SelectFileInput({ images }: SelectFileInputProps) {
 
-
+    const dispatch = useDispatch<AppDispatch>()
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newFiles: File[] = Array.from(event.target.files || []);
-        setImages(prevFiles => [...prevFiles, ...newFiles]);
+        newFiles.forEach((file) => {
+            dispatch(setImage(file))
+        })
     }
     return (
         <div className="selectFileInput">

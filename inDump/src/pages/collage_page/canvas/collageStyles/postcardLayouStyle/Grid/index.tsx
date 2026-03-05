@@ -1,10 +1,10 @@
 
 import { Group } from "react-konva"
-import { CollageContext } from "../../../../../../collageContext"
-import { useContext } from "react"
 import { GRIDSHAPES } from "./gridLayoutShapes"
+import { type RootState } from "../../../../../../state/store"
 
 import GridComponent from "./gridComponent"
+import { useSelector } from "react-redux"
 
 type GridStyleProps = {
     canvasWidth: number,
@@ -30,8 +30,8 @@ export default function GridStyle({ canvasHeight, canvasWidth }: GridStyleProps)
         }));
     }
 
-    const { images } = useContext(CollageContext)
-    const nomalizedshape = nomalizeGrid(images.length , canvasWidth, canvasHeight)
+    const images = useSelector((state: RootState) => state.images)
+    const nomalizedshape = nomalizeGrid(images.length, canvasWidth, canvasHeight)
 
 
     return (
