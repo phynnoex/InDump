@@ -1,19 +1,20 @@
-import { useContext } from "react";
 import "./styles.scss"
-import { CollageContext } from "../../../../collageContext";
-
+import { useSelector, useDispatch } from "react-redux";
+import { type AppDispatch, type RootState } from "../../../../state/store";
+import { setStyle } from "../../../../state/collage/collageSlice";
 
 type selectCollageStyleProps = {
     collageOptions: {
-        label: string;
+        label: "Grid" | "PostCard";
     }[]
 }
 
-export default function SelectCollageStyle({collageOptions}: selectCollageStyleProps) {
-    const { setCollageStyle, collageStyle } = useContext(CollageContext);
+export default function SelectCollageStyle({ collageOptions }: selectCollageStyleProps) {
+    const collageStyle = useSelector((state: RootState) => state.collageStyle)
+    const dispatch = useDispatch<AppDispatch>()
 
-    const selectButtonHandler = (label: string) => {
-        setCollageStyle(label);
+    const selectButtonHandler = (label: "Grid" | "PostCard") => {
+        dispatch(setStyle(label))
     }
 
     return (

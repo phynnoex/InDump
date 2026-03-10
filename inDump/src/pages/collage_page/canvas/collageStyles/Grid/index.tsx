@@ -1,7 +1,7 @@
 
 import { Group } from "react-konva"
 import { GRIDSHAPES } from "./gridLayoutShapes"
-import { type RootState } from "../../../../../../state/store"
+import { type RootState } from "../../../../../state/store"
 
 import GridComponent from "./gridComponent"
 import { useSelector } from "react-redux"

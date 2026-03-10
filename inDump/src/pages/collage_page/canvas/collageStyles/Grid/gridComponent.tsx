@@ -1,5 +1,5 @@
 import { Group, Image, Rect } from "react-konva"
-import { useKonvaImage } from "../../../../../../hooks/useKonvaImage"
+import { useKonvaImage } from "../../../../../hooks/useKonvaImage"
 
 
 

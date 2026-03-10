@@ -27,7 +27,8 @@ const Artboard = forwardRef<ArtboardHandle, ArtboardProps>(({ width, height, chi
 
     return (
         <>
-            {width > 0 && height > 0 && (<Stage width={width} height={height} ref={stageRef}>
+            {width > 0 && height > 0 && (
+                <Stage width={width} height={height} ref={stageRef}>
                 {children}
 
             </Stage>)}

@@ -1,15 +1,19 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
+type CollageStyle = "Grid" | "PostCard" ;
+
 interface CollageState {
     images: File[],
     size: { width: number, height: number },
-    collageStyle: string
+    collageStyle: CollageStyle;
 }
+
+
 
 const initialState: CollageState = {
     images: [],
     size: { width: 0, height: 0 },
-    collageStyle: ""
+    collageStyle: "Grid"
 }
 
 // createSlice
@@ -23,7 +27,7 @@ const collageSlice = createSlice({
         setSize: (state, action: PayloadAction<{ width: number, height: number }>) => {
             state.size = action.payload;
         },
-        setStyle: (state, action: PayloadAction<string>) => {
+        setStyle: (state, action: PayloadAction<CollageStyle>) => {
             state.collageStyle = action.payload;
         },
     }
