@@ -6,6 +6,7 @@ interface CollageState {
     images: File[],
     size: { width: number, height: number },
     collageStyle: CollageStyle;
+    stageDeselect: boolean
 }
 
 
@@ -13,7 +14,8 @@ interface CollageState {
 const initialState: CollageState = {
     images: [],
     size: { width: 0, height: 0 },
-    collageStyle: "Grid"
+    collageStyle: "Grid",
+    stageDeselect: false
 }
 
 // createSlice
@@ -30,9 +32,12 @@ const collageSlice = createSlice({
         setStyle: (state, action: PayloadAction<CollageStyle>) => {
             state.collageStyle = action.payload;
         },
+        setStageDeselect: (state, action: PayloadAction<boolean>) => {
+            state.stageDeselect = action.payload;
+        },
     }
 
 })
 
-export const { setImage, setSize, setStyle } = collageSlice.actions;
+export const { setImage, setSize, setStyle, setStageDeselect } = collageSlice.actions;
 export default collageSlice.reducer

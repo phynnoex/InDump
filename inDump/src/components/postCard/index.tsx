@@ -38,7 +38,6 @@ export default function PostCard({ image,scale }: postCardProps) {
         <Group
             width={postCardWidth}
             height={postCardHeight}
-            draggable={true}
             shadowColor="black"
             shadowBlur={10}
             shadowOffset={{ x: 5, y: 5 }}

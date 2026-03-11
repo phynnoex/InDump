@@ -1,11 +1,13 @@
 import { useContext, useMemo, } from "react"
-import { Image } from "react-konva"
+import { Image, Text } from "react-konva"
 import { useKonvaImage } from "../../../../../hooks/useKonvaImage"
 import computeLayout from "../../../../../services/normalizeLayoutShapes/computeLyout"
 import addOrganicVariation from "../../../../../services/addOrganicVariations"
 import PostCardWrapper from "./postCardWrapper"
 import { useSelector } from "react-redux"
 import { type RootState } from "../../../../../state/store"
+import useImage from "use-image"
+import bg from "../../../../../assets/bgs/background1.jpg"
 
 
 type PostCardProps = {
@@ -14,8 +16,8 @@ type PostCardProps = {
 }
 
 export default function PostCards({ canvasHeight, canvasWidth }: PostCardProps) {
-    const images = useSelector((state:RootState) => state.images)
-    const { konvaImage: bgImage } = useKonvaImage({ image: images[0] });
+    const images = useSelector((state: RootState) => state.images)
+    const [bgImage] = useImage(bg ?? "")
 
     const layout = useMemo(() => {
         const rawPoints = computeLayout(images.length, canvasWidth, canvasHeight);
@@ -31,6 +33,16 @@ export default function PostCards({ canvasHeight, canvasWidth }: PostCardProps) 
                 image={bgImage}
                 width={canvasWidth}
                 height={canvasHeight}
+            />
+            <Text
+                x={window.innerWidth / 2}
+                y={15}
+                text="August Dump"
+                fontSize={30}
+                fontFamily="white"
+                fill="white"
+                draggable
+                offsetX={60} // Approximate half width
             />
             {images.map((image, i) => {
 
