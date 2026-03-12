@@ -34,6 +34,7 @@ const Artboard = forwardRef<ArtboardHandle, ArtboardProps>(({ width,  height, ch
                 <Stage width={width} height={height} ref={stageRef} onMouseDown={(e)=>{
                     if (e.target === e.target.getStage()) {
                     dispatch(setStageDeselect(false))
+                    // set select to false
                     }
                 }}>
                 {children}
