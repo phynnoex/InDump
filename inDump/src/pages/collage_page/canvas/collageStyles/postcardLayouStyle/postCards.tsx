@@ -8,11 +8,16 @@ import { useSelector } from "react-redux"
 import { type RootState } from "../../../../../state/store"
 import useImage from "use-image"
 import bg from "../../../../../assets/bgs/background1.jpg"
+import CustomText from "../../../../../components/addText"
 
 
 type PostCardProps = {
     canvasWidth: number,
     canvasHeight: number
+}
+type fontObject = {
+    link: string,
+    fontFamily: string
 }
 
 export default function PostCards({ canvasHeight, canvasWidth }: PostCardProps) {
@@ -24,6 +29,7 @@ export default function PostCards({ canvasHeight, canvasWidth }: PostCardProps) 
         return rawPoints.map(p => addOrganicVariation(p));
     }, [images.length, canvasWidth, canvasHeight]);
 
+    
 
     return (
         <>
@@ -34,16 +40,7 @@ export default function PostCards({ canvasHeight, canvasWidth }: PostCardProps) 
                 width={canvasWidth}
                 height={canvasHeight}
             />
-            <Text
-                x={window.innerWidth / 2}
-                y={15}
-                text="August Dump"
-                fontSize={30}
-                fontFamily="white"
-                fill="white"
-                draggable
-                offsetX={60} // Approximate half width
-            />
+            <CustomText text="August Dump" font={{fontFamily:"Carattere", link:'https://fonts.googleapis.com/css2?family=Carattere&display=swap'}} size={20}/>
             {images.map((image, i) => {
 
                 return (
