@@ -71,3 +71,11 @@ export default defineConfig([
   },
 ])
 ```
+
+-- next-task refactor into metadata format 
+-- elements {
+  id: string
+  type: typeOfComponent
+  props: {...props of components}
+}[]
+-- switch statement in canvas to render elements.
