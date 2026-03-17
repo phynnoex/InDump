@@ -1,5 +1,5 @@
 import { useRef, useLayoutEffect, useState, Children, type ReactNode } from "react";
-import ButtonExport from "./button-export";
+import ButtonExport from "../../../components/button-export";
 import "./styles.scss";
 
 import Artboard from "./artboard";

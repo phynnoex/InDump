@@ -1,5 +1,5 @@
 import { Group, Image, Rect } from "react-konva"
-import { useKonvaImage } from "../../../../../hooks/useKonvaImage"
+import { useKonvaImage } from "../../hooks/useKonvaImage"
 
 
 
@@ -13,7 +13,7 @@ type GridComponentProps = {
     imageSrc: File
 }
 
-export default function GridComponent({ layout, imageSrc }: GridComponentProps) {
+export default function GridElement({ layout, imageSrc }: GridComponentProps) {
     const colors = ['#FFF230', '#13491cff', '#4d250fff'];
     const { konvaImage } = useKonvaImage({ image: imageSrc });
 
@@ -30,7 +30,7 @@ export default function GridComponent({ layout, imageSrc }: GridComponentProps) 
     const offsetX = (layout.w - fitWidth) / 2;
     const offsetY = (layout.h - fitHeight) / 2;
 
-
+    
 
     return (
         <>

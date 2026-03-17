@@ -1,12 +1,12 @@
 import { Group, Transformer } from "react-konva";
-import PostCard from "../../../../../../components/postCard";
-import { useKonvaImage } from "../../../../../../hooks/useKonvaImage";
+import PostCard from "../../../components/postCard";
+import { useKonvaImage } from "../../../hooks/useKonvaImage";
 import { useEffect, useRef, useState } from "react";
 
 import type Konva from "konva";
 import { useDispatch, useSelector } from "react-redux";
-import { type AppDispatch, type RootState } from "../../../../../../state/store";
-import { setStageDeselect } from "../../../../../../state/collage/collageSlice";
+import { type AppDispatch, type RootState } from "../../../state/store";
+import { setStageDeselect } from "../../../state/collage/collageSlice";
 
 
 export default function PostCardWrapper({ imageSrc, layout }: { imageSrc: File; layout: any }) {

@@ -1,4 +1,4 @@
-import {SHAPES} from "../../pages/collage_page/canvas/collageStyles/postcardLayouStyle/layoutShapes"
+import {SHAPES} from "../../collageStyles/postcardLayout/layoutShapes"
 
 export default function computeLayout(count: number, canvasWidth: number, canvasHeight: number) {
   const shape = SHAPES[count];

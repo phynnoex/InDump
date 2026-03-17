@@ -1,4 +1,4 @@
-import type { Point } from "../pages/collage_page/canvas/collageStyles/types";
+import type { Point } from "../collageStyles/types";
 
 export default function addOrganicVariation(point: Point) {
   return {

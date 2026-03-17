@@ -1,14 +1,14 @@
 import { useContext, useMemo, } from "react"
 import { Image, Text } from "react-konva"
-import { useKonvaImage } from "../../../../../hooks/useKonvaImage"
-import computeLayout from "../../../../../services/normalizeLayoutShapes/computeLyout"
-import addOrganicVariation from "../../../../../services/addOrganicVariations"
+import { useKonvaImage } from "../../hooks/useKonvaImage"
+import computeLayout from "../../services/normalizeLayoutShapes/computeLyout"
+import addOrganicVariation from "../../services/addOrganicVariations"
 import PostCardWrapper from "./postCardWrapper"
 import { useSelector } from "react-redux"
-import { type RootState } from "../../../../../state/store"
+import { type RootState } from "../../state/store"
 import useImage from "use-image"
-import bg from "../../../../../assets/bgs/background1.jpg"
-import CustomText from "../../../../../components/addText"
+import bg from "../../assets/bgs/background1.jpg"
+import CustomText from "../../components/addText"
 
 
 type PostCardProps = {
