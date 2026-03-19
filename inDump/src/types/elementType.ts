@@ -9,14 +9,23 @@ interface TextElementProps {
 }
 
 export type PostCardProps = {
-  image: HTMLImageElement;
+  image: File;
   scale: number | 0;
+  x: number | 0;
+  y: number | 0;
+  rotation: number | 0;
 };
 
 export type RectElementProps = {
   width: number;
   height: number;
   fill: string;
+};
+
+export type ImageElementProps = {
+  width: number;
+  height: number;
+  imageSrc: File;
 };
 
 type GridElementProps = {
@@ -49,4 +58,9 @@ export type ElementsNode =
       id: string;
       type: "rectangle";
       props: RectElementProps;
+    }
+  | {
+      id: string;
+      type: "image";
+      props: ImageElementProps;
     };

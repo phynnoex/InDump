@@ -3,6 +3,7 @@ import type { ElementsNode } from "../../types/elementType";
 import CustomText from "../../components/addText";
 import PostCard from "../../components/postCard";
 import GridElement from "../../components/gridElement/gridComponent";
+import ImageElement from "../../components/ImageElement";
 
 export default function RenderElement(el: ElementsNode) {
   switch (el.type) {
@@ -12,6 +13,8 @@ export default function RenderElement(el: ElementsNode) {
       return <PostCard key={el.id} {...el.props} />;
     case "rectangle":
       return <Rect key={el.id} {...el.props} />;
+    case "image":
+      return <ImageElement key={el.id} {...el.props} />;
     case "gridElement":
       return <GridElement key={el.id} {...el.props} />;
 

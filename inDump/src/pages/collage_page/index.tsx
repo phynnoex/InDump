@@ -6,13 +6,13 @@ import { AnimatePresence } from "framer-motion";
 import UploadImage from "./uploadImage";
 import SelectSize from "./uploadImage/selectSize";
 import SelectCollageStyle from "./uploadImage/selectCollageStyle";
-import PostCards from "../../collageStyles/postcardLayout/postCards";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../state/store";
 import ModalAddButton from "../../components/modalAddButton";
 import type { ElementsNode } from "../../types/elementType";
 import RenderElement from "../../services/RenderElement";
 import { createGridElements } from "../../collageStyles/Grid";
+import { PostCardLayout } from "../../collageStyles/postcardLayout/postCard";
 
 type sizeOption = {
   label: string;
@@ -22,11 +22,6 @@ type sizeOption = {
 type layoutType = "Grid" | "PostCard";
 type collageOptions = {
   label: layoutType;
-};
-
-type layoutProps = {
-  canvasWidth: number;
-  canvasHeight: number;
 };
 
 export default function CollagePage() {
@@ -59,12 +54,21 @@ export default function CollagePage() {
   ];
 
   useEffect(() => {
-    if (gridStyle !== "Grid") return;
     if (!images.length) return;
-
-    const gridElements = createGridElements(images, size.width, size.height);
-
-    setElements((prev) => [...prev, ...gridElements]);
+    if (gridStyle === "Grid") {
+      const gridElements = createGridElements(images, size.width, size.height);
+      setElements([...gridElements]);
+    } else if (gridStyle === "PostCard") {
+      const postCardElements = PostCardLayout(
+        images[0],
+        images,
+        size.height,
+        size.width,
+      );
+      setElements([...postCardElements]);
+    } else {
+      return;
+    }
   }, [images, size, gridStyle]);
 
   return (

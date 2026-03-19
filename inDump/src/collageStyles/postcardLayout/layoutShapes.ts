@@ -6,8 +6,8 @@ const SHAPES: Record<number, LayoutShape> = {
   ],
 
   2: [
-    { x: 0.35, y: 0.5 },
-    { x: 0.65, y: 0.5 }
+    { x: 0, y: 0 },
+    { x: 0.5, y: 0.5 }
   ],
 
   3: [
@@ -24,11 +24,11 @@ const SHAPES: Record<number, LayoutShape> = {
   ],
 
   5: [
-    { x: 0.5, y: 0.25 },
+    { x: 0.0, y: 0.0 },
     { x: 0.25, y: 0.5 },
     { x: 0.75, y: 0.5 },
     { x: 0.35, y: 0.8 },
-    { x: 0.65, y: 0.8 },
+    { x: 1.0, y: 1.0 },
   ],
 
   // you can define 6–12+ shapes the same way

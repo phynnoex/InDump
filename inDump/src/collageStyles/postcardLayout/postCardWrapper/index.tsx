@@ -7,6 +7,7 @@ import type Konva from "konva";
 import { useDispatch, useSelector } from "react-redux";
 import { type AppDispatch, type RootState } from "../../../state/store";
 import { setStageDeselect } from "../../../state/collage/collageSlice";
+import { image } from "framer-motion/client";
 
 
 export default function PostCardWrapper({ imageSrc, layout }: { imageSrc: File; layout: any }) {
@@ -25,7 +26,7 @@ export default function PostCardWrapper({ imageSrc, layout }: { imageSrc: File; 
     }
   }, [konvaImage, clicked])
 
-  if (!konvaImage) return null;
+  
 
   return (
     <>
@@ -40,8 +41,6 @@ export default function PostCardWrapper({ imageSrc, layout }: { imageSrc: File; 
         onDragStart={()=>{console.log("hey")}}
         onDragEnd={()=>{disptach(setStageDeselect(true))}}
       >
-        
-        <PostCard image={konvaImage} scale={1.5} />
 
       </Group>
       {clicked && <Transformer ref={trRef}  />}
