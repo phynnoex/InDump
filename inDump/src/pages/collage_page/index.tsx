@@ -13,6 +13,7 @@ import type { ElementsNode } from "../../types/elementType";
 import RenderElement from "../../services/RenderElement";
 import { createGridElements } from "../../collageStyles/Grid";
 import { PostCardLayout } from "../../collageStyles/postcardLayout/postCard";
+import MenuBar from "../../MenuBar";
 
 type sizeOption = {
   label: string;
@@ -73,6 +74,7 @@ export default function CollagePage() {
 
   return (
     <>
+      <MenuBar elements={elements} setElements={setElements}/>
       <div className="collagePage">
         <div className="collagePage_left">
           <Canvas>{elements.map((el) => RenderElement(el))}</Canvas>

@@ -2,7 +2,7 @@ type fontObject = {
   link: string;
   fontFamily: string;
 };
-interface TextElementProps {
+export type TextElementProps = {
   text: string;
   font: fontObject;
   size: number;

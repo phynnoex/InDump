@@ -1,0 +1,21 @@
+.headerBar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    box-sizing: border-box;
+    width: 100%;
+    button{
+        background-color: rgb(102, 34, 34);
+        height: 50px;
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+}
