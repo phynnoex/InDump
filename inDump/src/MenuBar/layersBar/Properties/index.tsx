@@ -1,5 +1,4 @@
 import "./styles.scss";
-import type { TextElementProps } from "../../../types/elementType";
 import type { elementIDType } from "../../../types/ElementIDTypeTypes";
 import type { ElementsNode } from "../../../types/elementType";
 
@@ -56,6 +55,7 @@ export default function PropertiesBar({
   if (selectedLayer?.type === "text") {
     return (
       <div className="propertiesBar">
+        <h3>Properties</h3>
         <label htmlFor="text-content">
           <input
             type="text"
