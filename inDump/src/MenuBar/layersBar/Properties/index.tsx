@@ -56,8 +56,12 @@ export default function PropertiesBar({
     return (
       <div className="propertiesBar">
         <h3>Properties</h3>
-        <label htmlFor="text-content">
+        <h4>Typography</h4>
+        <label htmlFor="text-content" className="w-full">
+          Content
+          <br />
           <input
+            className="w-full"
             type="text"
             id="text-content"
             name="text-content"
@@ -66,7 +70,10 @@ export default function PropertiesBar({
           />
         </label>
         <label htmlFor="text-size">
+          Fontsize
+          <br />
           <input
+            className="w-half"
             type="number"
             id="text-size"
             name="text-size"
