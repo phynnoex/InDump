@@ -9,9 +9,10 @@ interface CustomTextProps {
     text: string,
     font: fontObject,
     size: number
+    color?: string
 }
 
-export default function CustomText({ text, font, size }: CustomTextProps) {
+export default function CustomText({ text, font, size, color }: CustomTextProps) {
 
     const [fontLoaded, setFontLoaded] = useState<boolean>(false)
 
@@ -50,10 +51,11 @@ export default function CustomText({ text, font, size }: CustomTextProps) {
             text={text}
             fontSize={size}
             fontFamily={fontLoaded ? font.fontFamily : "Arial"}
-            fill="black"
+            fill={color || "#000000"}
             draggable
             offsetX={60} // Approximate half width
             onDragStart={() => { console.log(`${text} clciked`) }}
+            
         />
     )
 }

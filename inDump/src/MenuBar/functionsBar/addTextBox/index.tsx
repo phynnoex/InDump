@@ -15,6 +15,7 @@ export default function AddTextBox({ setElements }: AddTextBoxProps) {
       props: {
         text: "New Text",
         size: 16,
+        color: "#000000",
         font: {
           link: "https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap",
           fontFamily: "Roboto",

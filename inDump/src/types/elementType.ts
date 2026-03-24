@@ -1,10 +1,12 @@
-type fontObject = {
+export type fontObject = {
   link: string;
   fontFamily: string;
+  
 };
 export type TextElementProps = {
   text: string;
   font: fontObject;
+  color?: string;
   size: number;
 }
 

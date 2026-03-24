@@ -76,6 +76,7 @@ export default function LayersBar({ elements, setElements }: LayersBarProps) {
         </div>
       </div>
       <PropertiesBar
+        Elements={elements}
         selectedLayer={selectedLayers[selectedLayers.length - 1]}
         setElements={setElements}
       />
