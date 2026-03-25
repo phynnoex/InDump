@@ -17,7 +17,7 @@ type AddPostCardProps = {
 export default function AddPostCard({ setElements }: AddPostCardProps) {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
   const displayDropdownHandler = () => {
-    setDropdownVisible((prev) => !prev);
+    setDropdownVisible(true);
   };
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
