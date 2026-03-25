@@ -26,9 +26,7 @@ export default function AddTextBox({ setElements }: AddTextBoxProps) {
   };
   return (
     <div className="addTextBox" onClick={addTextHandler}>
-      <div className="dropDownContainer">
-        <HugeiconsIcon icon={ArrowDown01FreeIcons} size={16} stroke="1.5" />
-      </div>
+      <div className="dropDownContainer"></div>
       <div className="buttonContent">
         <div className="contentIcon">
           <HugeiconsIcon icon={TextIcon} size={16} stroke="1.5" />
