@@ -1,7 +1,6 @@
 import {
   ArrowDown01FreeIcons,
   ArrowRight01FreeIcons,
-  ArrowUp01FreeIcons,
   CardsIcon,
   Upload01FreeIcons,
 } from "@hugeicons/core-free-icons";
