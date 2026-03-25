@@ -7,6 +7,10 @@
   box-sizing: border-box;
   border-radius: 4px;
   gap: 4px;
+  &:hover {
+    background-color: rgb(70, 70, 70);
+    cursor: pointer;
+  }
   .postCardOptions {
     .customFileInput {
       display: flex;
@@ -47,10 +51,6 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    &:hover {
-      background-color: rgb(70, 70, 70);
-      cursor: pointer;
-    }
     .buttonContent {
       display: flex;
       align-items: center;
