@@ -5,14 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../state/store";
 import Konva from "konva";
 import { setStageDeselect } from "../../state/collage/collageSlice";
-
-type postCardProps = {
-  image: File;
-  scale: number | 0;
-  x: number | 0;
-  y: number | 0;
-  rotation: number | 0;
-};
+import type { PostCardProps } from "../../types/elementType";
 
 export default function PostCard({
   image,
@@ -20,7 +13,8 @@ export default function PostCard({
   x,
   y,
   rotation,
-}: postCardProps) {
+  opacity,
+}: PostCardProps) {
   const postCardWidth = 200;
   const postCardHeight = 220;
   const postcardPadding = 12;
@@ -74,6 +68,7 @@ export default function PostCard({
         onDragEnd={() => {
           disptach(setStageDeselect(true));
         }}
+        opacity={opacity}
       >
         <Rect
           x={0}

@@ -92,6 +92,22 @@ export default function PropertiesBar({
         ),
       );
     }
+
+    if (name === "text-opacity" && selectedLayer?.type === "text") {
+      setElements((prevElements) =>
+        prevElements.map((el) =>
+          el.id === selectedLayer.id && el.type === "text"
+            ? {
+                ...el,
+                props: {
+                  ...el.props,
+                  opacity: Number(value),
+                },
+              }
+            : el,
+        ),
+      );
+    }
   };
 
   if (selectedLayer?.type === "text") {
@@ -105,6 +121,25 @@ export default function PropertiesBar({
     return (
       <div className="propertiesBar">
         <h3>Properties</h3>
+        <h4>Appearance</h4>
+        <div className="inputs">
+          <label htmlFor="text-opacity" className="w-full">
+            Opacity
+            <br />
+            <input
+              className="input-field"
+              type="number"
+              id="text-opacity"
+              name="text-opacity"
+              placeholder="Opacity"
+              min={0}
+              max={1}
+              step={0.1}
+              onChange={handlePropertyChange}
+              value={selectedElement?.props.opacity ?? 1}
+            />
+          </label>
+        </div>
         <h4>Typography</h4>
         <div className="inputs">
           <label htmlFor="text-content" className="w-full">

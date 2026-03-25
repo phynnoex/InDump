@@ -10,9 +10,10 @@ interface CustomTextProps {
     font: fontObject,
     size: number
     color?: string
+    opacity?: number
 }
 
-export default function CustomText({ text, font, size, color }: CustomTextProps) {
+export default function CustomText({ text, font, size, color, opacity }: CustomTextProps) {
 
     const [fontLoaded, setFontLoaded] = useState<boolean>(false)
 
@@ -46,6 +47,7 @@ export default function CustomText({ text, font, size, color }: CustomTextProps)
 
     return (
         <Text
+            opacity={opacity}
             x={window.innerWidth / 2}
             y={15}
             text={text}

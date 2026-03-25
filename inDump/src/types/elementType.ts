@@ -8,6 +8,7 @@ export type TextElementProps = {
   font: fontObject;
   color?: string;
   size: number;
+  opacity?: number;
 }
 
 export type PostCardProps = {
@@ -16,18 +17,21 @@ export type PostCardProps = {
   x: number | 0;
   y: number | 0;
   rotation: number | 0;
+  opacity?: number;
 };
 
 export type RectElementProps = {
   width: number;
   height: number;
   fill: string;
+  opacity?: number;
 };
 
 export type ImageElementProps = {
   width: number;
   height: number;
   imageSrc: File;
+  opacity?: number;
 };
 
 type GridElementProps = {
@@ -38,6 +42,7 @@ type GridElementProps = {
     h: number;
   };
   imageSrc: File;
+  opacity?: number;
 };
 
 export type ElementsNode =
