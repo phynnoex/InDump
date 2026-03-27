@@ -1,7 +1,6 @@
 export type fontObject = {
   link: string;
   fontFamily: string;
-  
 };
 export type TextElementProps = {
   text: string;
@@ -9,7 +8,7 @@ export type TextElementProps = {
   color?: string;
   size: number;
   opacity?: number;
-}
+};
 
 export type PostCardProps = {
   image: File;
@@ -32,6 +31,13 @@ export type ImageElementProps = {
   height: number;
   imageSrc: File;
   opacity?: number;
+};
+
+export type StickerImageProps = {
+  imageSrc: File;
+  opacity?: number;
+  stroke?: string;
+  strokeWidth?: number;
 };
 
 type GridElementProps = {
@@ -70,4 +76,9 @@ export type ElementsNode =
       id: string;
       type: "image";
       props: ImageElementProps;
+    }
+  | {
+      id: string;
+      type: "stickerImage";
+      props: StickerImageProps;
     };
