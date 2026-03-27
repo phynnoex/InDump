@@ -2,42 +2,44 @@ import {
   ArrowDown01FreeIcons,
   ArrowRight01FreeIcons,
   CardsIcon,
+  ImageIcon,
   Upload01FreeIcons,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import "./styles.scss";
 import type { ElementsNode } from "../../../types/elementType";
 import { useState } from "react";
+import stickers from "./stickers";
 
-type AddPostCardProps = {
+type AddStickersProps = {
   setElements: React.Dispatch<React.SetStateAction<ElementsNode[]>>;
 };
 
-export default function AddPostCard({ setElements }: AddPostCardProps) {
+export default function AddStickers({ setElements }: AddStickersProps) {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
   const displayDropdownHandler = () => {
-    setDropdownVisible(true);
-  };
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
-
-  const handleAddPostCard = () => {
-    const newPostCardElement: ElementsNode = {
-      id: `postCard-${Date.now()}`,
-      type: "postCard",
-      props: {
-        image: selectedImage as File,
-        scale: 1,
-        x: 50,
-        y: 50,
-        rotation: 0,
-      },
-    };
-    setElements((prevElements) => [...prevElements, newPostCardElement]);
     setDropdownVisible((prev) => !prev);
   };
 
+  
+
+  const handleAddSticker = (image: string) => {
+    const newStickerElement: ElementsNode = {
+      id: `sticker-${Date.now()}`,
+      type: "stickerImage",
+      props: {
+        imageSrc: image || "",
+        opacity: 1,
+        stroke: "#000000",
+        strokeWidth: 0,
+      },
+    };
+
+    setElements((prevElements) => [...prevElements, newStickerElement]);
+  };
+
   return (
-    <div className="addPostCard" onClick={displayDropdownHandler}>
+    <div className="addStickers" onClick={displayDropdownHandler}>
       <div className="dropDownWrapper">
         <div className="dropDownContainer">
           <HugeiconsIcon
@@ -52,37 +54,26 @@ export default function AddPostCard({ setElements }: AddPostCardProps) {
         </div>
         <div className="buttonContent">
           <div className="contentIcon">
-            <HugeiconsIcon icon={CardsIcon} size={16} stroke="1.5" />
+            <HugeiconsIcon icon={ImageIcon} size={16} stroke="1.5" />
           </div>
-          <div className="contentText">Add Post Card</div>
+          <div className="contentText">Add Sticker</div>
         </div>
       </div>
       {dropdownVisible && (
-        <div className="postCardOptions">
-          <label className="customFileInput">
-            <HugeiconsIcon icon={Upload01FreeIcons} size={24} stroke="1.5" />
-
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  setSelectedImage(file);
-                  console.log(file);
-                }
-              }}
-            />
-          </label>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleAddPostCard();
-            }}
-            className="closeButton"
-          >
-            Add
-          </button>
+        <div className="stickersOptions">
+          {stickers.map((sticker, index) => (
+            <div
+              key={index}
+              className="stickerOption"
+              onClick={() => handleAddSticker(sticker)}
+            >
+              <img
+                src={sticker}
+                alt={`sticker-${index}`}
+                className="stickerPreview"
+              />
+            </div>
+          ))}
         </div>
       )}
     </div>

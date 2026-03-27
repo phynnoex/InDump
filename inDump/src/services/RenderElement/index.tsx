@@ -4,6 +4,7 @@ import CustomText from "../../components/addText";
 import PostCard from "../../components/postCard";
 import GridElement from "../../components/gridElement/gridComponent";
 import ImageElement from "../../components/ImageElement";
+import StickerImage from "../../components/sticker-image";
 
 export default function RenderElement(el: ElementsNode) {
   switch (el.type) {
@@ -17,6 +18,8 @@ export default function RenderElement(el: ElementsNode) {
       return <ImageElement key={el.id} {...el.props} />;
     case "gridElement":
       return <GridElement key={el.id} {...el.props} />;
+    case "stickerImage":
+      return <StickerImage key={el.id} {...el.props} />;
 
     default:
       break;

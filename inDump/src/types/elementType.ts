@@ -34,7 +34,7 @@ export type ImageElementProps = {
 };
 
 export type StickerImageProps = {
-  imageSrc: File;
+  imageSrc: string;
   opacity?: number;
   stroke?: string;
   strokeWidth?: number;
