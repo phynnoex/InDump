@@ -1,10 +1,5 @@
 import { Image, Rect, Group, Transformer } from "react-konva";
 import { useKonvaImage } from "../../hooks/useKonvaImage";
-import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../state/store";
-import Konva from "konva";
-import { setStageDeselect } from "../../state/collage/collageSlice";
 import type { PostCardProps } from "../../types/elementType";
 
 export default function PostCard({
@@ -25,18 +20,8 @@ export default function PostCard({
   const childX = postcardPadding;
   const childY = postcardPadding;
 
-  const groupRef = useRef<Konva.Group | null>(null);
-  const trRef = useRef<Konva.Transformer | null>(null);
-  const clicked = useSelector((state: RootState) => state.stageDeselect);
-  const disptach = useDispatch<AppDispatch>();
 
   const { konvaImage } = useKonvaImage({ image: image });
-
-  useEffect(() => {
-    if (clicked && trRef.current && groupRef.current) {
-      trRef.current.nodes([groupRef.current]);
-    }
-  }, [konvaImage, clicked]);
 
   if (!konvaImage) return null;
 
@@ -51,9 +36,7 @@ export default function PostCard({
   const offsetY = (childHeight - fitHeight) / 2;
   // ------------------------------
   return (
-    <>
       <Group
-        ref={groupRef}
         width={postCardWidth}
         height={postCardHeight}
         shadowColor="black"
@@ -64,10 +47,6 @@ export default function PostCard({
         shadowOffset={{ x: 5, y: 5 }}
         shadowOpacity={0.4}
         scale={{ x: scale, y: scale }}
-        draggable
-        onDragEnd={() => {
-          disptach(setStageDeselect(true));
-        }}
         opacity={opacity}
       >
         <Rect
@@ -96,7 +75,5 @@ export default function PostCard({
           />
         </Group>
       </Group>
-      {clicked && <Transformer ref={trRef} />}
-    </>
   );
 }

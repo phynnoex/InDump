@@ -54,7 +54,6 @@ export default function CustomText({ text, font, size, color, opacity }: CustomT
             fontSize={size}
             fontFamily={fontLoaded ? font.fontFamily : "Arial"}
             fill={color || "#000000"}
-            draggable
             offsetX={60} // Approximate half width
             onDragStart={() => { console.log(`${text} clciked`) }}
             

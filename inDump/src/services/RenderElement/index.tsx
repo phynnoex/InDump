@@ -1,26 +1,50 @@
-import { Rect, Text } from "react-konva";
+import { Rect} from "react-konva";
 import type { ElementsNode } from "../../types/elementType";
 import CustomText from "../../components/addText";
 import PostCard from "../../components/postCard";
 import GridElement from "../../components/gridElement/gridComponent";
 import ImageElement from "../../components/ImageElement";
 import StickerImage from "../../components/sticker-image";
+import SelectableWrapper from "../../components/selectableWrapper";
 
 export default function RenderElement(el: ElementsNode) {
   switch (el.type) {
     case "text":
-      return <CustomText key={el.id} {...el.props} />;
+      return (
+        <SelectableWrapper id={el.id}>
+          <CustomText {...el.props} />
+        </SelectableWrapper>
+      );
     case "postCard":
-      return <PostCard key={el.id} {...el.props} />;
+      return (
+        <SelectableWrapper id={el.id}>
+          <PostCard {...el.props} />
+        </SelectableWrapper>
+      );
     case "rectangle":
-      return <Rect key={el.id} {...el.props} />;
+      return (
+        <SelectableWrapper id={el.id}>
+          <Rect {...el.props} />
+        </SelectableWrapper>
+      );
     case "image":
-      return <ImageElement key={el.id} {...el.props} />;
+      return (
+        <SelectableWrapper id={el.id}>
+          <ImageElement {...el.props} />
+        </SelectableWrapper>
+      );
     case "gridElement":
-      return <GridElement key={el.id} {...el.props} />;
+      return (
+        <SelectableWrapper id={el.id}>
+          <GridElement {...el.props} />
+        </SelectableWrapper>
+      );
     case "stickerImage":
-      return <StickerImage key={el.id} {...el.props} />;
-
+      return (
+        <SelectableWrapper id={el.id}>
+          <StickerImage {...el.props} />
+        </SelectableWrapper>
+      );
     default:
       break;
   }
