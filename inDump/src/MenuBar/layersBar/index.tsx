@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { ElementsNode } from "../../types/elementType";
 import "./styles.scss";
 import {
+  ArrowDownIcon,
   ArrowUpIcon,
   Cancel01FreeIcons,
   ClosedCaptionIcon,
@@ -13,7 +14,7 @@ import PropertiesBar from "./Properties";
 import type { elementIDType } from "../../types/ElementIDTypeTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { type AppDispatch, type RootState } from "../../state/store";
-import { setSelectedElementId } from "../../state/collage/collageSlice";
+import { setSelectedElementIds } from "../../state/collage/collageSlice";
 
 type selectedLayerType = {
   id: string;
@@ -27,14 +28,29 @@ type LayersBarProps = {
 };
 
 export default function LayersBar({ elements, setElements }: LayersBarProps) {
-  const [selectedLayers, setSelectedLayers] = useState<selectedLayerType[]>([]);
+  const selectedIds = useSelector(
+    (state: RootState) => state.selectedElementIds,
+  );
+
+  const selectedLayers = selectedIds
+    ? elements
+        .filter((el) => selectedIds.includes(el.id))
+        .map((el) => ({ id: el.id, type: el.type }))
+    : [];
+
   const deleteLayer = (id: string[]) => {
-    setElements((prevElements) =>
-      prevElements.filter((el) => !id.includes(el.id)),
-    );
-    setSelectedLayers((prevSelected) =>
-      prevSelected.filter((layer) => !id.includes(layer.id)),
-    );
+    setElements((prev) => prev.filter((el) => !id.includes(el.id)));
+    // If the deleted layer is selected, clear the selection
+    if (selectedIds) {
+      const newSelectedIds = selectedIds.filter(
+        (selectedId) => !id.includes(selectedId),
+      );
+      dispatch(
+        setSelectedElementIds(
+          newSelectedIds.length > 0 ? newSelectedIds : null,
+        ),
+      );
+    }
   };
 
   const duplicateLayer = (id: string[]) => {
@@ -52,52 +68,44 @@ export default function LayersBar({ elements, setElements }: LayersBarProps) {
   };
 
   const MoveLayerForward = (id: string) => {
-    setElements((prevElements) => {
-      const index = prevElements.findIndex((el) => el.id === id);
-      if (index < prevElements.length - 1) {
-        const newElements = [...prevElements];
-        [newElements[index], newElements[index + 1]] = [
-          newElements[index + 1],
-          newElements[index],
-        ];
-        return newElements;
-      }
+    if (selectedIds && selectedIds.includes(id)) {
+      const index = elements.findIndex((el) => el.id === id);
 
-      return prevElements;
-    });
+      if (index < elements.length - 1) {
+        const newElements = [...elements];
+        const temp = newElements[index];
+        newElements[index] = newElements[index + 1];
+        newElements[index + 1] = temp;
+        setElements(newElements);
+      }
+    }
+  };
+
+  const MoveLayerBackward = (id: string) => {
+    if (selectedIds && selectedIds.includes(id)) {
+      const index = elements.findIndex((el) => el.id === id);
+
+      if (index > 0) {
+        const newElements = [...elements];
+        const temp = newElements[index];
+        newElements[index] = newElements[index - 1];
+        newElements[index - 1] = temp;
+        setElements(newElements);
+      }
+    }
   };
 
   const dispatch = useDispatch<AppDispatch>();
 
   const handleClickLayer = (id: string) => {
-    console.log(selectedLayers);
-    dispatch(setSelectedElementId(id));
-    const isSelected = selectedLayers.some((layer) => layer.id === id);
-    if (isSelected) {
-      setSelectedLayers((prev) => prev.filter((layer) => layer.id !== id));
+    if (selectedIds && selectedIds.includes(id)) {
+      // If the layer is already selected, deselect it
+      dispatch(setSelectedElementIds(null));
     } else {
-      const layerToAdd = elements.find((el) => el.id === id);
-      if (layerToAdd) {
-        setSelectedLayers((prev) => [
-          ...prev,
-          { id: layerToAdd.id, type: layerToAdd.type },
-        ]);
-      }
+      // Otherwise, select the layer
+      dispatch(setSelectedElementIds([id]));
     }
   };
-
-  const selectedId = useSelector((state: RootState) => state.selectedElementId);
-
-  useEffect(() => {
-    if (selectedId) {
-      const layerToAdd = elements.find((el) => el.id === selectedId);
-      if (layerToAdd) {
-        setSelectedLayers([{ id: layerToAdd.id, type: layerToAdd.type }]);
-      }
-    } else {
-      setSelectedLayers([]);
-    }
-  }, [selectedId,  elements]);
 
   return (
     <>
@@ -110,7 +118,7 @@ export default function LayersBar({ elements, setElements }: LayersBarProps) {
             .map((el) => (
               <div
                 key={el.id}
-                className={`layer-item ${selectedLayers.some((layer) => layer.id === el.id) ? "selected" : ""}`}
+                className={`layer-item ${selectedIds && selectedIds.includes(el.id) ? "selected" : ""}`}
                 onClick={() => handleClickLayer(el.id)}
               >
                 {el.type} - {el.id}
@@ -138,9 +146,19 @@ export default function LayersBar({ elements, setElements }: LayersBarProps) {
 
           <button
             className="moveForward-layer-button"
-            onClick={() => MoveLayerForward(selectedLayers[0]?.id)}
+            onClick={() =>
+              MoveLayerForward(selectedLayers[selectedLayers.length - 1].id)
+            }
           >
             <HugeiconsIcon icon={ArrowUpIcon} size={24} stroke="1.5" />
+          </button>
+          <button
+            className="moveBackward-layer-button"
+            onClick={() =>
+              MoveLayerBackward(selectedLayers[selectedLayers.length - 1].id)
+            }
+          >
+            <HugeiconsIcon icon={ArrowDownIcon} size={24} stroke="1.5" />
           </button>
         </div>
       </div>

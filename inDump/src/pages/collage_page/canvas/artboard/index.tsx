@@ -3,7 +3,7 @@ import { forwardRef, useImperativeHandle, useRef } from "react";
 import { Stage } from "react-konva";
 import { useDispatch } from "react-redux";
 import { type AppDispatch } from "../../../../state/store";
-import { setSelectedElementId } from "../../../../state/collage/collageSlice";
+import { setSelectedElementIds } from "../../../../state/collage/collageSlice";
 
 type ArtboardHandle = {
   getStage: () => Konva.Stage | null;
@@ -35,7 +35,7 @@ const Artboard = forwardRef<ArtboardHandle, ArtboardProps>(
             ref={stageRef}
             onMouseDown={(e) => {
               if (e.target === e.target.getStage()) {
-                dispatch(setSelectedElementId(null));
+                dispatch(setSelectedElementIds(null));
                 // set select to false
               }
             }}

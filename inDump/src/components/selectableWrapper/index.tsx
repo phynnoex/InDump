@@ -3,7 +3,7 @@ import type { AppDispatch, RootState } from "../../state/store";
 import { useEffect, useRef } from "react";
 import { Group, Transformer } from "react-konva";
 import type { Konva } from "konva/lib/_FullInternals";
-import { setSelectedElementId } from "../../state/collage/collageSlice";
+import { setSelectedElementIds } from "../../state/collage/collageSlice";
 
 interface SelectableWrapperProps {
   id: string;
@@ -14,8 +14,8 @@ export default function SelectableWrapper({
   id,
   children,
 }: SelectableWrapperProps) {
-  const selectedId = useSelector((state: RootState) => state.selectedElementId);
-  const isSelected = selectedId === id;
+  const selectedIds = useSelector((state: RootState) => state.selectedElementIds);
+  const isSelected = selectedIds?.includes(id);
   const dispatch = useDispatch<AppDispatch>();
 
   const trRef = useRef<Konva.Transformer | null>(null);
@@ -34,7 +34,7 @@ export default function SelectableWrapper({
         draggable
         onClick={(e) => {
           e.cancelBubble = true;
-          dispatch(setSelectedElementId(id));
+          dispatch(setSelectedElementIds([id]));
         }}
         onDragMove={() => {
           trRef.current?.getLayer()?.batchDraw(); // 🔥 keeps transformer in sync

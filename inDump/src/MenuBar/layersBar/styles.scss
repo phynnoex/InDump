@@ -39,7 +39,8 @@
     }
   }
   .action-buttons {
-    height: 15%;
+    height: fit-content;
+    box-sizing: border-box;
     display: flex;
     gap: 10px;
     border: 1px solid rgba(95, 95, 95, 0.8);
