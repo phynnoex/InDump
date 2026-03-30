@@ -76,7 +76,11 @@ export default function CollagePage() {
       <MenuBar elements={elements} setElements={setElements} />
       <div className="collagePage">
         <div className="collagePage_left">
-          <Canvas>{elements.map((el) => RenderElement(el))}</Canvas>
+          <Canvas>
+            {elements.map((el) => (
+              <React.Fragment key={el.id}>{RenderElement(el)}</React.Fragment>
+            ))}
+          </Canvas>
           <ModalAddButton
             setIsButtonClicked={setIsButtonClicked}
             isButtonClicked={isButtonClicked}
