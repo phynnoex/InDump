@@ -1,13 +1,14 @@
-import { ArrowDown01FreeIcons, TextIcon } from "@hugeicons/core-free-icons";
+import { TextIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import "./styles.scss";
 import type { ElementsNode } from "../../../types/elementType";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../../state/store";
+import { setElements } from "../../../state/collage/collageSlice";
 
-type AddTextBoxProps = {
-  setElements: React.Dispatch<React.SetStateAction<ElementsNode[]>>;
-};
-
-export default function AddTextBox({ setElements }: AddTextBoxProps) {
+export default function AddTextBox() {
+  const Elements = useSelector((state: RootState) => state.elements.present);
+  const dispatch = useDispatch<AppDispatch>();
   const addTextHandler = () => {
     const newTextElement: ElementsNode = {
       id: `text-${Date.now()}`,
@@ -22,7 +23,7 @@ export default function AddTextBox({ setElements }: AddTextBoxProps) {
         },
       },
     };
-    setElements((prevElements) => [...prevElements, newTextElement]);
+    dispatch(setElements([...Elements, newTextElement]));
   };
   return (
     <div className="addTextBox" onClick={addTextHandler}>

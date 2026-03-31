@@ -8,17 +8,18 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import "./styles.scss";
 import type { ElementsNode } from "../../../types/elementType";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../../state/store";
+import { setElements } from "../../../state/collage/collageSlice";
 
-type AddPostCardProps = {
-  setElements: React.Dispatch<React.SetStateAction<ElementsNode[]>>;
-};
-
-export default function AddPostCard({ setElements }: AddPostCardProps) {
+export default function AddPostCard() {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
   const displayDropdownHandler = () => {
     setDropdownVisible(true);
   };
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const Elements = useSelector((state: RootState) => state.elements.present);
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleAddPostCard = () => {
     const newPostCardElement: ElementsNode = {
@@ -32,7 +33,7 @@ export default function AddPostCard({ setElements }: AddPostCardProps) {
         rotation: 0,
       },
     };
-    setElements((prevElements) => [...prevElements, newPostCardElement]);
+    dispatch(setElements([...Elements, newPostCardElement]));
     setDropdownVisible((prev) => !prev);
   };
 

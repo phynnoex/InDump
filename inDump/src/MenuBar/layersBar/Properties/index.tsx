@@ -2,6 +2,9 @@ import "./styles.scss";
 import type { elementIDType } from "../../../types/ElementIDTypeTypes";
 import type { ElementsNode } from "../../../types/elementType";
 import fonts from "../../../assets/fonts/fontLists";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../../state/store";
+import { setElements } from "../../../state/collage/collageSlice";
 
 type selectedLayerType = {
   id: string;
@@ -10,15 +13,12 @@ type selectedLayerType = {
 
 type PropertiesBarProps = {
   selectedLayer: selectedLayerType;
-  setElements: React.Dispatch<React.SetStateAction<ElementsNode[]>>;
-  Elements: ElementsNode[];
 };
 
-export default function PropertiesBar({
-  selectedLayer,
-  setElements,
-  Elements,
-}: PropertiesBarProps) {
+export default function PropertiesBar({ selectedLayer }: PropertiesBarProps) {
+  const Elements = useSelector((state: RootState) => state.elements.present);
+  const dispatch = useDispatch<AppDispatch>();
+
   const handlePropertyChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -27,86 +27,81 @@ export default function PropertiesBar({
     const { name, value } = e.target;
 
     if (name === "text-content" && selectedLayer?.type === "text") {
-      setElements((prevElements) =>
-        prevElements.map((el) =>
-          el.id === selectedLayer.id && el.type === "text"
-            ? {
-                ...el,
-                props: {
-                  ...el.props,
-                  text: value,
-                },
-              }
-            : el,
-        ),
+      const newElements = Elements.map((el) =>
+        el.id === selectedLayer.id && el.type === "text"
+          ? {
+              ...el,
+              props: {
+                ...el.props,
+                text: value,
+              },
+            }
+          : el,
       );
+      dispatch(setElements(newElements));
     }
 
     if (name === "text-size" && selectedLayer?.type === "text") {
-      setElements((prevElements) =>
-        prevElements.map((el) =>
-          el.id === selectedLayer.id && el.type === "text"
-            ? {
-                ...el,
-                props: {
-                  ...el.props,
-                  size: Number(value),
-                },
-              }
-            : el,
-        ),
+      const newElements = Elements.map((el) =>
+        el.id === selectedLayer.id && el.type === "text"
+          ? {
+              ...el,
+              props: {
+                ...el.props,
+                size: Number(value),
+              },
+            }
+          : el,
       );
+      dispatch(setElements(newElements));
     }
 
     if (name === "font-family" && selectedLayer?.type === "text") {
       const selectedFont = fonts.find((font) => font.fontFamily === value);
       if (selectedFont) {
-        setElements((prevElements) =>
-          prevElements.map((el) =>
-            el.id === selectedLayer.id && el.type === "text"
-              ? {
-                  ...el,
-                  props: {
-                    ...el.props,
-                    font: selectedFont,
-                  },
-                }
-              : el,
-          ),
+        const newElements = Elements.map((el) =>
+          el.id === selectedLayer.id && el.type === "text"
+            ? {
+                ...el,
+                props: {
+                  ...el.props,
+                  font: selectedFont,
+                },
+              }
+            : el,
         );
+        dispatch(setElements(newElements));
       }
     }
 
     if (name === "text-color" && selectedLayer?.type === "text") {
-      setElements((prevElements) =>
-        prevElements.map((el) =>
-          el.id === selectedLayer.id && el.type === "text"
-            ? {
-                ...el,
-                props: {
-                  ...el.props,
-                  color: value,
-                },
-              }
-            : el,
-        ),
+      const newElements = Elements.map((el) =>
+        el.id === selectedLayer.id && el.type === "text"
+          ? {
+              ...el,
+              props: {
+                ...el.props,
+                color: value,
+              },
+            }
+          : el,
       );
+      dispatch(setElements(newElements));
     }
 
     if (name === "text-opacity" && selectedLayer?.type === "text") {
-      setElements((prevElements) =>
-        prevElements.map((el) =>
-          el.id === selectedLayer.id && el.type === "text"
-            ? {
-                ...el,
-                props: {
-                  ...el.props,
-                  opacity: Number(value),
-                },
-              }
-            : el,
-        ),
+      const newElements = Elements.map((el) =>
+        el.id === selectedLayer.id && el.type === "text"
+          ? {
+              ...el,
+              props: {
+                ...el.props,
+                opacity: Number(value),
+              },
+            }
+          : el,
       );
+      dispatch(setElements(newElements));
     }
   };
 

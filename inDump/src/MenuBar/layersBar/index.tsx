@@ -1,36 +1,31 @@
-import { useEffect, useState } from "react";
 import type { ElementsNode } from "../../types/elementType";
 import "./styles.scss";
 import {
   ArrowDownIcon,
   ArrowUpIcon,
   Cancel01FreeIcons,
-  ClosedCaptionIcon,
   Copy01Icon,
   Delete01FreeIcons,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import PropertiesBar from "./Properties";
-import type { elementIDType } from "../../types/ElementIDTypeTypes";
 import { useDispatch, useSelector } from "react-redux";
 import { type AppDispatch, type RootState } from "../../state/store";
-import { setSelectedElementIds } from "../../state/collage/collageSlice";
+import {
+  redo,
+  setElements,
+  setSelectedElementIds,
+  undo,
+} from "../../state/collage/collageSlice";
+import { useShortcut } from "../../hooks/useShortcut";
 
-type selectedLayerType = {
-  id: string;
-  type: elementIDType;
-};
-
-type LayersBarProps = {
-  // Define any props you need for the LayersBar component
-  elements: ElementsNode[];
-  setElements: React.Dispatch<React.SetStateAction<ElementsNode[]>>;
-};
-
-export default function LayersBar({ elements, setElements }: LayersBarProps) {
+export default function LayersBar() {
   const selectedIds = useSelector(
     (state: RootState) => state.selectedElementIds,
   );
+
+  const elements = useSelector((state: RootState) => state.elements.present);
+  const dispatch = useDispatch<AppDispatch>();
 
   const selectedLayers = selectedIds
     ? elements
@@ -39,7 +34,8 @@ export default function LayersBar({ elements, setElements }: LayersBarProps) {
     : [];
 
   const deleteLayer = (id: string[]) => {
-    setElements((prev) => prev.filter((el) => !id.includes(el.id)));
+    dispatch(setElements(elements.filter((el) => !id.includes(el.id))));
+
     // If the deleted layer is selected, clear the selection
     if (selectedIds) {
       const newSelectedIds = selectedIds.filter(
@@ -64,7 +60,7 @@ export default function LayersBar({ elements, setElements }: LayersBarProps) {
       duplicatedLayers.push(newLayer);
     });
 
-    setElements((prev) => [...prev, ...duplicatedLayers]);
+    dispatch(setElements([...elements, ...duplicatedLayers]));
   };
 
   const MoveLayerForward = (id: string) => {
@@ -76,7 +72,7 @@ export default function LayersBar({ elements, setElements }: LayersBarProps) {
         const temp = newElements[index];
         newElements[index] = newElements[index + 1];
         newElements[index + 1] = temp;
-        setElements(newElements);
+        dispatch(setElements(newElements));
       }
     }
   };
@@ -90,12 +86,26 @@ export default function LayersBar({ elements, setElements }: LayersBarProps) {
         const temp = newElements[index];
         newElements[index] = newElements[index - 1];
         newElements[index - 1] = temp;
-        setElements(newElements);
+        dispatch(setElements(newElements));
       }
     }
   };
 
-  const dispatch = useDispatch<AppDispatch>();
+  useShortcut("backspace", () => {
+    deleteLayer(selectedIds || []);
+  });
+
+  useShortcut("ctrl+d", () => {
+    duplicateLayer(selectedIds || []);
+  });
+
+  useShortcut("ctrl+z", () => {
+    dispatch(undo());
+  });
+
+  useShortcut("ctrl+y", () => {
+    dispatch(redo());
+  });
 
   const handleClickLayer = (id: string) => {
     if (selectedIds && selectedIds.includes(id)) {
@@ -163,9 +173,7 @@ export default function LayersBar({ elements, setElements }: LayersBarProps) {
         </div>
       </div>
       <PropertiesBar
-        Elements={elements}
         selectedLayer={selectedLayers[selectedLayers.length - 1]}
-        setElements={setElements}
       />
     </>
   );

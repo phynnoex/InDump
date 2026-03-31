@@ -1,27 +1,24 @@
 import {
   ArrowDown01FreeIcons,
   ArrowRight01FreeIcons,
-  CardsIcon,
   ImageIcon,
-  Upload01FreeIcons,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import "./styles.scss";
 import type { ElementsNode } from "../../../types/elementType";
 import { useState } from "react";
 import stickers from "./stickers";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../../state/store";
+import { setElements } from "../../../state/collage/collageSlice";
 
-type AddStickersProps = {
-  setElements: React.Dispatch<React.SetStateAction<ElementsNode[]>>;
-};
-
-export default function AddStickers({ setElements }: AddStickersProps) {
+export default function AddStickers() {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
+  const Elements = useSelector((state: RootState) => state.elements.present);
+  const dispatch = useDispatch<AppDispatch>();
   const displayDropdownHandler = () => {
     setDropdownVisible((prev) => !prev);
   };
-
-  
 
   const handleAddSticker = (image: string) => {
     const newStickerElement: ElementsNode = {
@@ -35,7 +32,7 @@ export default function AddStickers({ setElements }: AddStickersProps) {
       },
     };
 
-    setElements((prevElements) => [...prevElements, newStickerElement]);
+    dispatch(setElements([...Elements, newStickerElement]));
   };
 
   return (

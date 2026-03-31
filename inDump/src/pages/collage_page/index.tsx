@@ -6,14 +6,14 @@ import { AnimatePresence } from "framer-motion";
 import UploadImage from "./uploadImage";
 import SelectSize from "./uploadImage/selectSize";
 import SelectCollageStyle from "./uploadImage/selectCollageStyle";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../state/store";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../state/store";
 import ModalAddButton from "../../components/modalAddButton";
-import type { ElementsNode } from "../../types/elementType";
 import RenderElement from "../../services/RenderElement";
 import { createGridElements } from "../../collageStyles/Grid";
 import { PostCardLayout } from "../../collageStyles/postcardLayout/postCard";
 import MenuBar from "../../MenuBar";
+import { setElements } from "../../state/collage/collageSlice";
 
 type sizeOption = {
   label: string;
@@ -29,19 +29,9 @@ export default function CollagePage() {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const images = useSelector((state: RootState) => state.images);
   const size = useSelector((state: RootState) => state.size);
-  const [elements, setElements] = useState<ElementsNode[]>([
-    {
-      id: "background",
-      type: "rectangle",
-      props: {
-        width: size.width,
-        height: size.height,
-        fill: "white",
-        opacity: 1,
-      },
-    },
-  ]);
+  const elements = useSelector((state: RootState) => state.elements.present);
   const gridStyle = useSelector((state: RootState) => state.collageStyle);
+  const dispatch = useDispatch<AppDispatch>()
 
   const sizeOptions: sizeOption[] = [
     { label: "1:1", width: 1080, height: 1080 },
@@ -57,7 +47,7 @@ export default function CollagePage() {
     if (!images.length) return;
     if (gridStyle === "Grid") {
       const gridElements = createGridElements(images, size.width, size.height);
-      setElements([...gridElements]);
+      dispatch(setElements(gridElements));
     } else if (gridStyle === "PostCard") {
       const postCardElements = PostCardLayout(
         images[0],
@@ -65,7 +55,7 @@ export default function CollagePage() {
         size.height,
         size.width,
       );
-      setElements([...postCardElements]);
+      dispatch(setElements(postCardElements));
     } else {
       return;
     }
@@ -73,7 +63,7 @@ export default function CollagePage() {
 
   return (
     <>
-      <MenuBar elements={elements} setElements={setElements} />
+      <MenuBar />
       <div className="collagePage">
         <div className="collagePage_left">
           <Canvas>
