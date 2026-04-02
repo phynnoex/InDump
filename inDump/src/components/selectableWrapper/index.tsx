@@ -14,7 +14,9 @@ export default function SelectableWrapper({
   id,
   children,
 }: SelectableWrapperProps) {
-  const selectedIds = useSelector((state: RootState) => state.selectedElementIds);
+  const selectedIds = useSelector(
+    (state: RootState) => state.selectedElementIds,
+  );
   const isSelected = selectedIds?.includes(id);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -32,15 +34,13 @@ export default function SelectableWrapper({
       <Group
         ref={groupRef}
         draggable
-        onClick={(e) => {
+        onTap={(e) => {
           e.cancelBubble = true;
           dispatch(setSelectedElementIds([id]));
         }}
-        onDragMove={() => {
-          trRef.current?.getLayer()?.batchDraw(); // 🔥 keeps transformer in sync
-        }}
-        onTransform={() => {
-          trRef.current?.getLayer()?.batchDraw();
+        onClick={(e) => {
+          e.cancelBubble = true;
+          dispatch(setSelectedElementIds([id]));
         }}
       >
         {children}
