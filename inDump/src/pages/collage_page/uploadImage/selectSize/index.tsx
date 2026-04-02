@@ -29,8 +29,8 @@ export default function SelectSize({ sizeOptions }: SelectSizeProps) {
             <div className="size-options">
                 {sizeOptions.map((option) => (
                     <button key={option.label} className={`option-card ${(size.width === option.width && size.height === option.height) ? "selected" : ""}`} onClick={() => selectButtonHandler(option.width, option.height)}>
-                        <span>{option.label}</span>
-                        <span>  {option.width} x {option.height}</span>
+                        <div className="size-label">{option.label}</div>
+                        <div className="size-details">  {option.width} x {option.height}</div>
                     </button>
                 ))}
             </div>

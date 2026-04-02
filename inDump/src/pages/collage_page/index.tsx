@@ -14,6 +14,9 @@ import { createGridElements } from "../../collageStyles/Grid";
 import { PostCardLayout } from "../../collageStyles/postcardLayout/postCard";
 import MenuBar from "../../MenuBar";
 import { setElements } from "../../state/collage/collageSlice";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import MobileLayout from "./layout/mobileLayout";
+import DesktopLayout from "./layout/desktopLayout";
 
 type sizeOption = {
   label: string;
@@ -26,12 +29,12 @@ type collageOptions = {
 };
 
 export default function CollagePage() {
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
   const images = useSelector((state: RootState) => state.images);
   const size = useSelector((state: RootState) => state.size);
   const elements = useSelector((state: RootState) => state.elements.present);
   const gridStyle = useSelector((state: RootState) => state.collageStyle);
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useDispatch<AppDispatch>();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const sizeOptions: sizeOption[] = [
     { label: "1:1", width: 1080, height: 1080 },
@@ -63,39 +66,20 @@ export default function CollagePage() {
 
   return (
     <>
-      <MenuBar />
-      <div className="collagePage">
-        <div className="collagePage_left">
-          <Canvas>
-            {elements.map((el) => (
-              <React.Fragment key={el.id}>{RenderElement(el)}</React.Fragment>
-            ))}
-          </Canvas>
-          <ModalAddButton
-            setIsButtonClicked={setIsButtonClicked}
-            isButtonClicked={isButtonClicked}
-          />
-        </div>
-      </div>
-      <AnimatePresence>
-        {isButtonClicked ? (
-          <UploadModal setIsButtonClicked={setIsButtonClicked}>
-            <UploadImage />
-            <SelectSize sizeOptions={sizeOptions} />
-            <SelectCollageStyle
-              collageOptions={collageOptions}
-            ></SelectCollageStyle>
-            <button
-              className="collage-submit-button"
-              onClick={() => setIsButtonClicked(false)}
-            >
-              Generate Collage
-            </button>
-          </UploadModal>
-        ) : (
-          ""
-        )}
-      </AnimatePresence>
+      {/* <MenuBar /> */}
+      {isMobile ? (
+        <MobileLayout
+          sizeOptions={sizeOptions}
+          collageOptions={collageOptions}
+          elements={elements}
+        />
+      ) : (
+        <DesktopLayout
+          sizeOptions={sizeOptions}
+          collageOptions={collageOptions}
+          elements={elements}
+        />
+      )}
     </>
   );
 }

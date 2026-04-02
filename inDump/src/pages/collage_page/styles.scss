@@ -45,3 +45,26 @@
     height: 64px;
     font-size: 16px;
 }
+
+.bottom-menu-container {
+    display: flex;
+    margin: auto;
+}
+
+// desktop layout
+@media screen and (min-width: 769px) {
+    .collagePage {
+        display: flex;
+        flex-direction: row;
+        gap: 24px;
+        &_left {
+            flex: 1;
+        }
+        &_right {
+            min-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+    }
+}

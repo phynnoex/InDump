@@ -6,8 +6,9 @@ import Artboard from "./artboard";
 import { Group, Layer, Rect, Text } from "react-konva";
 import type Konva from "konva";
 
-import { useSelector } from "react-redux";
-import type { RootState } from "../../../state/store";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../../state/store";
+import { setSize } from "../../../state/collage/collageSlice";
 
 interface CanvasProps {
   children: ReactNode
@@ -19,6 +20,7 @@ export default function Canvas({ children }: CanvasProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const ArtboardRef = useRef<{ getStage: () => Konva.Stage | null }>(null)
   const [containerSize, setContainerSize] = useState({ w: 0, h: 0 });
+  const dispatch = useDispatch<AppDispatch>()
 
   useLayoutEffect(() => {
     if (containerRef.current) {
@@ -26,6 +28,7 @@ export default function Canvas({ children }: CanvasProps) {
         w: containerRef.current.clientWidth,
         h: containerRef.current.clientHeight,
       });
+      dispatch(setSize({ width: 1080, height: 1080 }));
     }
   }, [containerRef.current]);
 
@@ -36,13 +39,16 @@ export default function Canvas({ children }: CanvasProps) {
   const offsetX = (containerSize.w - size.width * scale) / 2;
   const offsetY = (containerSize.h - size.height * scale) / 2;
 
+  //set default size
+  
+
   return (
     <div className="canvas" ref={containerRef}>
       <ButtonExport ArtboardRef={ArtboardRef} />
       <div className="canvas_background">
         <div className="canvas-element">
           {size.width && size.height ? (
-            <Artboard ref={ArtboardRef} width={containerSize.w} height={containerSize.h}>
+            <Artboard ref={ArtboardRef} width={containerSize.w - 20} height={containerSize.h - 20}>
               <Layer>
                 <Group
                   scaleX={scale}

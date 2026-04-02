@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../state/store";
 import { setElements } from "../../../state/collage/collageSlice";
 
+
+
 export default function AddTextBox() {
   const Elements = useSelector((state: RootState) => state.elements.present);
   const dispatch = useDispatch<AppDispatch>();
-  const addTextHandler = () => {
+   const addTextHandler = () => {
     const newTextElement: ElementsNode = {
       id: `text-${Date.now()}`,
       type: "text",
