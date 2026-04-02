@@ -1,71 +1,72 @@
 @use "../../styles/colors.scss";
 
 .collagePage {
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 24px 16px;
-    height: 100vh;
-    overflow-y: hidden;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 24px 16px;
+  height: 100vh;
+  overflow-y: hidden;
 
-    &_left {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        gap: 16px;
-
-
-    }
+  &_left {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 16px;
+  }
 }
 
 .menu-bar {
-    width: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_button {
+    height: 56px;
+    width: 56px;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    &_button {
-        height: 56px;
-        width: 56px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: colors.$primary-dark;
-        color: white;
-        border-radius: 50%;
-        border: none;
-       
-    }
-}
-
-.collage-submit-button{
     background-color: colors.$primary-dark;
     color: white;
+    border-radius: 50%;
     border: none;
-    border-radius: 8px;
-    height: 64px;
-    font-size: 16px;
+  }
+}
+
+.collage-submit-button {
+  background-color: colors.$primary-dark;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  height: 64px;
+  font-size: 16px;
 }
 
 .bottom-menu-container {
-    display: flex;
-    margin: auto;
+  display: flex;
+  margin: auto;
 }
 
 // desktop layout
 @media screen and (min-width: 769px) {
-    .collagePage {
-        display: flex;
-        flex-direction: row;
-        gap: 24px;
-        &_left {
-            flex: 1;
-        }
-        &_right {
-            min-width: 400px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            overflow-y: auto;
-        }
+  .collagePage {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    &_left {
+      flex: 1;
     }
+    &_right {
+      min-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+    }
+  }
+  .collage-submit-button {
+    background-color: colors.$primary-dark;
+    min-height: 64px;
+  }
 }
