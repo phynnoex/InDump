@@ -1,41 +1,48 @@
 @use "../../../../styles/colors.scss";
 
-.select-collage-style{
-    margin: none;
+.select-collage-style {
+  margin: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  &_heading {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    &_heading{
-        display: flex;
-        flex-direction: column;
-        h4{
-            margin: 0;
-            font-size: 16px;
-            font-weight: 600;
-        }
-        p{
-            margin: 0;
-            font-size: 14px;
-            color: #666;
-        }
+    h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
     }
+    p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+  }
 }
-.collage-style-options{
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    flex-wrap: wrap;
-    
+.collage-style-options {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.collage-style-card{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 48px;
-    min-width: 120px;
-    font-size: 14px;
-    border-radius: 4px;
-    background-color: colors.$primary-grey;
+.collage-style-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  min-width: 120px;
+  font-size: 14px;
+  border-radius: 4px;
+  background-color: colors.$primary-grey;
+  &:hover {
+    border: 2px solid rgba($color: #000000, $alpha: 0.4);
+    cursor: pointer;
+  }
+}
+.selected {
+  border: 2px solid rgba($color: #000000, $alpha: 0.4);
+  box-shadow: 0px 0px 0px 3px rgba($color: #000000, $alpha: 0.1);
 }
