@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../state/store";
 import { setElements } from "../../../state/collage/collageSlice";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import MobileMenuPopUp from "../../mobileMenuPopUp";
 
 export default function AddStickers() {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
@@ -82,6 +83,25 @@ export default function AddStickers() {
       ) : (
         <>
           <HugeiconsIcon icon={ImageIcon} size={24} stroke="1.5" />
+          {dropdownVisible && (
+            <MobileMenuPopUp  title="Add Sticker" setVisible={setDropdownVisible}>
+              <div className="stickersWrapper">
+              {stickers.map((sticker, index) => (
+                <div
+                  key={index}
+                  className="stickerOption"
+                  onClick={() => handleAddSticker(sticker)}
+                >
+                  <img
+                    src={sticker}
+                    alt={`sticker-${index}`}
+                    className="stickerPreview"
+                  />
+                </div>
+              ))}
+              </div>
+            </MobileMenuPopUp>
+          )}
         </>
       )}
     </div>

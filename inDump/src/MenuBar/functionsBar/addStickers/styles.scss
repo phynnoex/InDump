@@ -4,7 +4,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
+}
+
+.stickerOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: 0.2s;
+  &:hover {
+    background-color: rgb(114, 114, 114);
+    cursor: pointer;
+  }
+  .stickerPreview {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+  }
+}
+
+.stickersWrapper{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 //desktop layout
@@ -26,23 +49,6 @@
       width: 100%;
       display: flex;
       flex-wrap: wrap;
-      .stickerOption {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 4px;
-        border-radius: 4px;
-        transition: 0.2s;
-        &:hover {
-          background-color: rgb(114, 114, 114);
-          cursor: pointer;
-        }
-        .stickerPreview {
-          width: 60px;
-          height: 60px;
-          object-fit: contain;
-        }
-      }
     }
     .dropDownWrapper {
       display: flex;
