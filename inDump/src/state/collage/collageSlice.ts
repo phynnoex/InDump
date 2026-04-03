@@ -13,6 +13,7 @@ interface CollageState {
     present: ElementsNode[];
     future: ElementsNode[][];
   };
+  isInitialStyleSet: boolean;
 }
 
 const initialState: CollageState = {
@@ -25,6 +26,7 @@ const initialState: CollageState = {
     present: [],
     future: [],
   },
+  isInitialStyleSet: false,
 };
 
 // createSlice
@@ -57,6 +59,9 @@ const collageSlice = createSlice({
       state.elements.present = next;
       state.elements.future = [];
     },
+    setIsInitialStyleSet: (state, action: PayloadAction<boolean>) => {
+      state.isInitialStyleSet = action.payload;
+    },
     undo: (state) => {
       //make last past index the present, make present index the future
       const { past, present, future } = state.elements;
@@ -82,6 +87,6 @@ const collageSlice = createSlice({
   },
 });
 
-export const { setImage, setSize, setStyle, setSelectedElementIds, setElements, undo, redo } =
+export const { setImage, setSize, setStyle, setSelectedElementIds, setElements, undo, redo, setIsInitialStyleSet } =
   collageSlice.actions;
 export default collageSlice.reducer;

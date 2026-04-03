@@ -1,20 +1,9 @@
-import HeaderBar from "./headerBar";
 import "./styles.scss";
-import LayersBar from "./layersBar";
-import FunctionsBar from "./functionsBar";
+import { useMediaQuery } from "../hooks/useMediaQuery";
+import DesktopMenuLayout from "./layout/desktop-menu-layout";
+import MobileMenuLayout from "./layout/mobile-menu-layout";
 
 export default function MenuBar() {
-  return (
-    <div className="menu-section">
-      <div className="menu-section__header">
-        <HeaderBar title="InDump" setIsMenuClose={() => {}} />
-      </div>
-      <div className="menu-section__functions">
-        <FunctionsBar />
-      </div>
-      <div className="menu-section__layers">
-        <LayersBar />
-      </div>
-    </div>
-  );
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  return <>{isMobile ? <MobileMenuLayout /> : <DesktopMenuLayout /> }</>;
 }

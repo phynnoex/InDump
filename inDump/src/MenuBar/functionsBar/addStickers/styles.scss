@@ -1,21 +1,32 @@
 .addStickers {
+  width: 32px;
+  height: 32px;
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: rgb(56, 56, 56);
-  padding: 8px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  gap: 4px;
-  &:hover {
-    background-color: rgb(70, 70, 70);
-    cursor: pointer;
-  }
-  .stickersOptions {
-    width: 100%;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+//desktop layout
+@media screen and (min-width: 769px) {
+  .addStickers {
     display: flex;
-    flex-wrap: wrap;
-    .stickerOption{
+    flex-direction: column;
+    width: 100%;
+    background-color: rgb(56, 56, 56);
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    gap: 4px;
+    &:hover {
+      background-color: rgb(70, 70, 70);
+      cursor: pointer;
+    }
+    .stickersOptions {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      .stickerOption {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -23,39 +34,38 @@
         border-radius: 4px;
         transition: 0.2s;
         &:hover {
-            background-color: rgb(114, 114, 114);
-            cursor: pointer;
+          background-color: rgb(114, 114, 114);
+          cursor: pointer;
         }
         .stickerPreview {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
+          width: 60px;
+          height: 60px;
+          object-fit: contain;
         }
-        
+      }
     }
-
-  }
-  .dropDownWrapper {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    .buttonContent {
+    .dropDownWrapper {
       display: flex;
       align-items: center;
       gap: 8px;
-      cursor: pointer;
-      .contentIcon {
-        width: 20px;
-        height: 20px;
-        background-color: rgba(102, 102, 102, 0.5);
-        border-radius: 4px;
+      .buttonContent {
         display: flex;
         align-items: center;
-        justify-content: center;
-      }
-      .contentText {
-        font-size: 14px;
-        color: white;
+        gap: 8px;
+        cursor: pointer;
+        .contentIcon {
+          width: 20px;
+          height: 20px;
+          background-color: rgba(102, 102, 102, 0.5);
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .contentText {
+          font-size: 14px;
+          color: white;
+        }
       }
     }
   }

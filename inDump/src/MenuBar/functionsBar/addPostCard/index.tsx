@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../state/store";
 import { setElements } from "../../../state/collage/collageSlice";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 
 export default function AddPostCard() {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
@@ -20,6 +21,7 @@ export default function AddPostCard() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const Elements = useSelector((state: RootState) => state.elements.present);
   const dispatch = useDispatch<AppDispatch>();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const handleAddPostCard = () => {
     const newPostCardElement: ElementsNode = {
@@ -39,52 +41,64 @@ export default function AddPostCard() {
 
   return (
     <div className="addPostCard" onClick={displayDropdownHandler}>
-      <div className="dropDownWrapper">
-        <div className="dropDownContainer">
-          <HugeiconsIcon
-            icon={
-              dropdownVisible === true
-                ? ArrowDown01FreeIcons
-                : ArrowRight01FreeIcons
-            }
-            size={16}
-            stroke="1.5"
-          />
-        </div>
-        <div className="buttonContent">
-          <div className="contentIcon">
-            <HugeiconsIcon icon={CardsIcon} size={16} stroke="1.5" />
-          </div>
-          <div className="contentText">Add Post Card</div>
-        </div>
-      </div>
-      {dropdownVisible && (
-        <div className="postCardOptions">
-          <label className="customFileInput">
-            <HugeiconsIcon icon={Upload01FreeIcons} size={24} stroke="1.5" />
-
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  setSelectedImage(file);
-                  console.log(file);
+      {!isMobile ? (
+        <>
+          <div className="dropDownWrapper">
+            <div className="dropDownContainer">
+              <HugeiconsIcon
+                icon={
+                  dropdownVisible === true
+                    ? ArrowDown01FreeIcons
+                    : ArrowRight01FreeIcons
                 }
-              }}
-            />
-          </label>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleAddPostCard();
-            }}
-            className="closeButton"
-          >
-            Add
-          </button>
-        </div>
+                size={16}
+                stroke="1.5"
+              />
+            </div>
+            <div className="buttonContent">
+              <div className="contentIcon">
+                <HugeiconsIcon icon={CardsIcon} size={16} stroke="1.5" />
+              </div>
+              <div className="contentText">Add Post Card</div>
+            </div>
+          </div>
+          {dropdownVisible && (
+            <div className="postCardOptions">
+              <label className="customFileInput">
+                <HugeiconsIcon
+                  icon={Upload01FreeIcons}
+                  size={24}
+                  stroke="1.5"
+                />
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setSelectedImage(file);
+                      console.log(file);
+                    }
+                  }}
+                />
+              </label>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAddPostCard();
+                }}
+                className="closeButton"
+              >
+                Add
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
+        <>
+          <HugeiconsIcon icon={CardsIcon} size={24} stroke="1.5" />
+        </>
       )}
     </div>
   );

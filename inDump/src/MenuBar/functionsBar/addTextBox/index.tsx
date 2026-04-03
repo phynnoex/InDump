@@ -5,13 +5,14 @@ import type { ElementsNode } from "../../../types/elementType";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../state/store";
 import { setElements } from "../../../state/collage/collageSlice";
-
-
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { useState } from "react";
 
 export default function AddTextBox() {
   const Elements = useSelector((state: RootState) => state.elements.present);
+
   const dispatch = useDispatch<AppDispatch>();
-   const addTextHandler = () => {
+  const addTextHandler = () => {
     const newTextElement: ElementsNode = {
       id: `text-${Date.now()}`,
       type: "text",
@@ -27,15 +28,25 @@ export default function AddTextBox() {
     };
     dispatch(setElements([...Elements, newTextElement]));
   };
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
   return (
     <div className="addTextBox" onClick={addTextHandler}>
-      <div className="dropDownContainer"></div>
-      <div className="buttonContent">
-        <div className="contentIcon">
-          <HugeiconsIcon icon={TextIcon} size={16} stroke="1.5" />
-        </div>
-        <div className="contentText">Add TextBox</div>
-      </div>
+      {!isMobile ? (
+        <>
+          <div className="dropDownContainer"></div>
+          <div className="buttonContent">
+            <div className="contentIcon">
+              <HugeiconsIcon icon={TextIcon} size={16} stroke="1.5" />
+            </div>
+            <div className="contentText">Add TextBox</div>
+          </div>
+        </>
+      ) : (
+        <>
+          <HugeiconsIcon icon={TextIcon} size={24} stroke="1.5" />
+        </>
+      )}
     </div>
   );
 }

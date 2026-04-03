@@ -1,73 +1,84 @@
 .addPostCard {
+  width: 32px;
+  height: 32px;
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: rgb(56, 56, 56);
-  padding: 8px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  gap: 4px;
-  &:hover {
-    background-color: rgb(70, 70, 70);
-    cursor: pointer;
-  }
-  .postCardOptions {
-    .customFileInput {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      padding: 8px 12px;
-      border: 1px dashed #ccc;
-      border-radius: 8px;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 80px;
-      box-sizing: border-box;
-      transition: 0.2s;
+  justify-content: center;
+  align-items: center;
+}
 
-      &:hover {
-        background: #686868;
-      }
-
-      input {
-        display: none; // 👈 hides default input
-      }
-    }
-    .closeButton {
-      margin-top: 8px;
-      padding: 8px 12px;
-      background-color: rgb(70, 70, 70);
-      border: none;
-      border-radius: 4px;
-      color: white;
-      cursor: pointer;
-      width: 100%;
-    }
-  }
-  .dropDownWrapper {
+// dekstop layout
+@media screen and (min-width: 769px) {
+  .addPostCard {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    .buttonContent {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgb(56, 56, 56);
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    gap: 4px;
+    &:hover {
+      background-color: rgb(70, 70, 70);
       cursor: pointer;
-      .contentIcon {
-        width: 20px;
-        height: 20px;
-        background-color: rgba(102, 102, 102, 0.5);
-        border-radius: 4px;
+    }
+    .postCardOptions {
+      .customFileInput {
         display: flex;
         align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        padding: 8px 12px;
+        border: 1px dashed #ccc;
+        border-radius: 8px;
+        width: 100%;
+        display: flex;
         justify-content: center;
+        align-items: center;
+        height: 80px;
+        box-sizing: border-box;
+        transition: 0.2s;
+
+        &:hover {
+          background: #686868;
+        }
+
+        input {
+          display: none; // 👈 hides default input
+        }
       }
-      .contentText {
-        font-size: 14px;
+      .closeButton {
+        margin-top: 8px;
+        padding: 8px 12px;
+        background-color: rgb(70, 70, 70);
+        border: none;
+        border-radius: 4px;
         color: white;
+        cursor: pointer;
+        width: 100%;
+      }
+    }
+    .dropDownWrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      .buttonContent {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        .contentIcon {
+          width: 20px;
+          height: 20px;
+          background-color: rgba(102, 102, 102, 0.5);
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .contentText {
+          font-size: 14px;
+          color: white;
+        }
       }
     }
   }

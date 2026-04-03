@@ -45,7 +45,13 @@
 
 .bottom-menu-container {
   display: flex;
-  margin: auto;
+}
+.mobile-menu-bar{
+  flex: 1;
+  width: auto;
+}
+.add-wrapper{
+  width: max-content;
 }
 
 // desktop layout

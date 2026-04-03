@@ -3,6 +3,7 @@ import {
   ArrowRight01FreeIcons,
   ImageIcon,
 } from "@hugeicons/core-free-icons";
+
 import { HugeiconsIcon } from "@hugeicons/react";
 import "./styles.scss";
 import type { ElementsNode } from "../../../types/elementType";
@@ -11,11 +12,13 @@ import stickers from "./stickers";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../state/store";
 import { setElements } from "../../../state/collage/collageSlice";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 
 export default function AddStickers() {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
   const Elements = useSelector((state: RootState) => state.elements.present);
   const dispatch = useDispatch<AppDispatch>();
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const displayDropdownHandler = () => {
     setDropdownVisible((prev) => !prev);
   };
@@ -37,41 +40,49 @@ export default function AddStickers() {
 
   return (
     <div className="addStickers" onClick={displayDropdownHandler}>
-      <div className="dropDownWrapper">
-        <div className="dropDownContainer">
-          <HugeiconsIcon
-            icon={
-              dropdownVisible === true
-                ? ArrowDown01FreeIcons
-                : ArrowRight01FreeIcons
-            }
-            size={16}
-            stroke="1.5"
-          />
-        </div>
-        <div className="buttonContent">
-          <div className="contentIcon">
-            <HugeiconsIcon icon={ImageIcon} size={16} stroke="1.5" />
-          </div>
-          <div className="contentText">Add Sticker</div>
-        </div>
-      </div>
-      {dropdownVisible && (
-        <div className="stickersOptions">
-          {stickers.map((sticker, index) => (
-            <div
-              key={index}
-              className="stickerOption"
-              onClick={() => handleAddSticker(sticker)}
-            >
-              <img
-                src={sticker}
-                alt={`sticker-${index}`}
-                className="stickerPreview"
+      {!isMobile ? (
+        <>
+          <div className="dropDownWrapper">
+            <div className="dropDownContainer">
+              <HugeiconsIcon
+                icon={
+                  dropdownVisible === true
+                    ? ArrowDown01FreeIcons
+                    : ArrowRight01FreeIcons
+                }
+                size={16}
+                stroke="1.5"
               />
             </div>
-          ))}
-        </div>
+            <div className="buttonContent">
+              <div className="contentIcon">
+                <HugeiconsIcon icon={ImageIcon} size={16} stroke="1.5" />
+              </div>
+              <div className="contentText">Add Sticker</div>
+            </div>
+          </div>
+          {dropdownVisible && (
+            <div className="stickersOptions">
+              {stickers.map((sticker, index) => (
+                <div
+                  key={index}
+                  className="stickerOption"
+                  onClick={() => handleAddSticker(sticker)}
+                >
+                  <img
+                    src={sticker}
+                    alt={`sticker-${index}`}
+                    className="stickerPreview"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      ) : (
+        <>
+          <HugeiconsIcon icon={ImageIcon} size={24} stroke="1.5" />
+        </>
       )}
     </div>
   );

@@ -11,7 +11,10 @@ import { useMediaQuery } from "react-responsive";
 import UploadModal from "../uploadModal";
 import ModalAddButton from "../../../components/modalAddButton";
 import RenderElement from "../../../services/RenderElement";
-import { setElements } from "../../../state/collage/collageSlice";
+import {
+  setElements,
+  setIsInitialStyleSet,
+} from "../../../state/collage/collageSlice";
 import MenuBar from "../../../MenuBar";
 import { PostCardLayout } from "../../../collageStyles/postcardLayout/postCard";
 import { createGridElements } from "../../../collageStyles/Grid";
@@ -37,6 +40,9 @@ export default function MobileLayout({
   elements: ElementsNode[];
 }) {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const isInitialStyleSet = useSelector(
+    (state: RootState) => state.isInitialStyleSet,
+  );
 
   return (
     <>
@@ -48,10 +54,17 @@ export default function MobileLayout({
             ))}
           </Canvas>
           <div className="bottom-menu-container">
-            <ModalAddButton
-              setIsButtonClicked={setIsButtonClicked}
-              isButtonClicked={isButtonClicked}
-            />
+            {!isInitialStyleSet && (
+              <div className="mobile-menu-bar">
+                <MenuBar />
+              </div>
+            )}
+            <div className="add-wrapper">
+              <ModalAddButton
+                setIsButtonClicked={setIsButtonClicked}
+                isButtonClicked={isButtonClicked}
+              />
+            </div>
           </div>
         </div>
       </div>
