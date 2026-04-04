@@ -1,4 +1,5 @@
 import FunctionsBar from "../functionsBar";
+import "./mobile.scss"
 
 export default function MobileMenuLayout() {
   return (

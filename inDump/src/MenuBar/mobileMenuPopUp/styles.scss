@@ -1,6 +1,9 @@
 .mobile-menu-pop-up {
   max-width: 70vw;
-  min-height: 200px;
+  min-height: 120px;
+  overflow-y: auto;
+  max-height: 320px;
+  height: max-content;
   position: absolute;
   bottom: 90px;
   left: 16px;
@@ -20,12 +23,14 @@
     align-items: center;
     width: 100%;
     background-color: #515151;
-    padding: 8px 16px;
+    padding: 8px ;
     box-sizing: border-box;
     border-radius: 8px 8px 0 0;
   }
   &__content {
-    padding: 8px 16px;
+    padding: 8px 8px;
+    box-sizing: border-box;
+    width: 100%;
   }
 }
 

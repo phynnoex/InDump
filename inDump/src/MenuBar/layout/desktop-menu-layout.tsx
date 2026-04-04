@@ -1,6 +1,7 @@
 import FunctionsBar from "../functionsBar";
 import HeaderBar from "../headerBar";
 import LayersBar from "../layersBar";
+import "./dekstop.scss"
 
 export default function DesktopMenuLayout() {
   return (

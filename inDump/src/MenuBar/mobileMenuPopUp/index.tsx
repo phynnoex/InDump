@@ -13,13 +13,18 @@ export default function MobileMenuPopUp({
   children,
   setVisible,
 }: MobilePopUpProps) {
+
+  const handleClose = () => {
+    console.log("close");
+    setVisible(false);
+  }
   return (
-    <div className="mobile-menu-pop-up">
+    <div className="mobile-menu-pop-up" onClick={(e) => e.stopPropagation()}>
       <div className="mobile-menu-pop-up__header">
         <div className="header-text">{title}</div>
         <div
           className="cancel-button"
-          onClick={() => setVisible && setVisible(false)}
+          onClick={handleClose}
         >
           <HugeiconsIcon icon={CancelIcon} size={16} stroke="1.5" />
         </div>

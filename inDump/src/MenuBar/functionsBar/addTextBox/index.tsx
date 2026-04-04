@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../state/store";
 import { setElements } from "../../../state/collage/collageSlice";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
-import { useState } from "react";
 
 export default function AddTextBox() {
   const Elements = useSelector((state: RootState) => state.elements.present);

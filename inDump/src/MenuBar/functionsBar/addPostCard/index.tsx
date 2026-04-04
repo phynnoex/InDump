@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../state/store";
 import { setElements } from "../../../state/collage/collageSlice";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import MobileMenuPopUp from "../../mobileMenuPopUp";
 
 export default function AddPostCard() {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
@@ -98,6 +99,41 @@ export default function AddPostCard() {
       ) : (
         <>
           <HugeiconsIcon icon={CardsIcon} size={24} stroke="1.5" />
+          {dropdownVisible && (
+            <MobileMenuPopUp
+              title="Add Sticker"
+              setVisible={setDropdownVisible}
+            >
+              <label className="customFileInput">
+                <HugeiconsIcon
+                  icon={Upload01FreeIcons}
+                  size={24}
+                  stroke="1.5"
+                />
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setSelectedImage(file);
+                      console.log(file);
+                    }
+                  }}
+                />
+              </label>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAddPostCard();
+                }}
+                className="closeButton"
+              >
+                Add
+              </button>
+            </MobileMenuPopUp>
+          )}
         </>
       )}
     </div>
