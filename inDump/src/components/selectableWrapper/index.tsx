@@ -3,7 +3,11 @@ import type { AppDispatch, RootState } from "../../state/store";
 import { useEffect, useRef } from "react";
 import { Group, Transformer } from "react-konva";
 import type { Konva } from "konva/lib/_FullInternals";
-import { setSelectedElementIds } from "../../state/collage/collageSlice";
+import type { ElementsNode } from "../../types/elementType";
+import {
+  setElements,
+  setSelectedElementIds,
+} from "../../state/collage/collageSlice";
 
 interface SelectableWrapperProps {
   id: string;
@@ -19,6 +23,7 @@ export default function SelectableWrapper({
   );
   const isSelected = selectedIds?.includes(id);
   const dispatch = useDispatch<AppDispatch>();
+  const elements = useSelector((state: RootState) => state.elements.present);
 
   const trRef = useRef<Konva.Transformer | null>(null);
   const groupRef = useRef<Konva.Group | null>(null);
@@ -29,6 +34,22 @@ export default function SelectableWrapper({
       trRef.current.getLayer()?.batchDraw();
     }
   }, [trRef, groupRef, isSelected]);
+
+  const handleDragEnd = (e: Konva.KonvaEventObject<DragEvent>, id: string) => {
+    console.log("drag end", e);
+    const newElements: ElementsNode[] = elements.map((el) =>
+      el.id === id
+        ? {
+            ...el,
+            props: {
+              ...el.props,
+              position: { x: e.target.x(), y: e.target.y() },
+            },
+          }as ElementsNode
+        : el,
+    );
+    dispatch(setElements(newElements));
+  };
   return (
     <>
       <Group
@@ -42,6 +63,7 @@ export default function SelectableWrapper({
           e.cancelBubble = true;
           dispatch(setSelectedElementIds([id]));
         }}
+        onDragEnd={(e) => handleDragEnd(e, id)}
       >
         {children}
       </Group>

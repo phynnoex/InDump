@@ -1,4 +1,4 @@
-import { Rect} from "react-konva";
+import { Rect } from "react-konva";
 import type { ElementsNode } from "../../types/elementType";
 import CustomText from "../../components/addText";
 import PostCard from "../../components/postCard";
@@ -19,12 +19,6 @@ export default function RenderElement(el: ElementsNode) {
       return (
         <SelectableWrapper id={el.id}>
           <PostCard {...el.props} />
-        </SelectableWrapper>
-      );
-    case "rectangle":
-      return (
-        <SelectableWrapper id={el.id}>
-          <Rect {...el.props} />
         </SelectableWrapper>
       );
     case "image":

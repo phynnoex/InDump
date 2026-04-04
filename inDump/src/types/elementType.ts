@@ -2,13 +2,22 @@ export type fontObject = {
   link: string;
   fontFamily: string;
 };
+
+type ElementTransformProps = {
+  scale?: number;
+  opacity?: number;
+  position?: {
+    x: number;
+    y: number;
+  };
+};
+
 export type TextElementProps = {
   text: string;
   font: fontObject;
   color?: string;
   size: number;
-  opacity?: number;
-};
+} & ElementTransformProps;
 
 export type PostCardProps = {
   image: File;
@@ -16,29 +25,25 @@ export type PostCardProps = {
   x: number | 0;
   y: number | 0;
   rotation: number | 0;
-  opacity?: number;
-};
+} & ElementTransformProps;
 
 export type RectElementProps = {
   width: number;
   height: number;
   fill: string;
-  opacity?: number;
-};
+} & ElementTransformProps;
 
 export type ImageElementProps = {
   width: number;
   height: number;
   imageSrc: File;
-  opacity?: number;
-};
+} & ElementTransformProps;
 
 export type StickerImageProps = {
   imageSrc: string;
-  opacity?: number;
   stroke?: string;
   strokeWidth?: number;
-};
+} & ElementTransformProps;
 
 type GridElementProps = {
   layout: {
@@ -48,8 +53,7 @@ type GridElementProps = {
     h: number;
   };
   imageSrc: File;
-  opacity?: number;
-};
+} & ElementTransformProps;
 
 export type ElementsNode =
   | {
