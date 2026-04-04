@@ -7,17 +7,12 @@ import SelectSize from "../uploadImage/selectSize";
 import SelectCollageStyle from "../uploadImage/selectCollageStyle";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../state/store";
-import { useMediaQuery } from "react-responsive";
+
 import UploadModal from "../uploadModal";
 import ModalAddButton from "../../../components/modalAddButton";
 import RenderElement from "../../../services/RenderElement";
-import {
-  setElements,
-  setIsInitialStyleSet,
-} from "../../../state/collage/collageSlice";
+
 import MenuBar from "../../../MenuBar";
-import { PostCardLayout } from "../../../collageStyles/postcardLayout/postCard";
-import { createGridElements } from "../../../collageStyles/Grid";
 import type { ElementsNode } from "../../../types/elementType";
 
 type sizeOption = {
