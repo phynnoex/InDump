@@ -36,16 +36,15 @@ export default function SelectableWrapper({
   }, [trRef, groupRef, isSelected]);
 
   const handleDragEnd = (e: Konva.KonvaEventObject<DragEvent>, id: string) => {
-    console.log(elements);
     const newElements: ElementsNode[] = elements.map((el) =>
       el.id === id
-        ? {
+        ? ({
             ...el,
             props: {
               ...el.props,
               position: { x: e.target.x(), y: e.target.y() },
             },
-          }as ElementsNode
+          } as ElementsNode)
         : el,
     );
     dispatch(setElements(newElements));
@@ -53,7 +52,6 @@ export default function SelectableWrapper({
 
   const element = elements.find((el) => el.id === id);
   return (
-    
     <>
       <Group
         ref={groupRef}
