@@ -10,14 +10,13 @@ export default function ImageElement({
   opacity
 
 }: ImageElementProps) {
-  const konvaImage = useKonvaImage({ image: imageSrc });
-  if (!konvaImage) return;
+  const [konvaImage] = useImage(imageSrc);
   return (
     <Image
       opacity={opacity}
       x={0}
       y={0}
-      image={konvaImage.konvaImage}
+      image={konvaImage}
       width={width}
       height={height}
     />

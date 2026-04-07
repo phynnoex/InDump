@@ -4,7 +4,7 @@ import { type ElementsNode } from "../../types/elementType";
 GRIDSHAPES;
 
 export function createGridElements(
-  images: File[],
+  images: string[],
   canvasWidth: number,
   canvasHeight: number,
 ): ElementsNode[] {

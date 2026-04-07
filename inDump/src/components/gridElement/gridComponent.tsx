@@ -1,5 +1,6 @@
 import { Group, Image, Rect } from "react-konva";
 import { useKonvaImage } from "../../hooks/useKonvaImage";
+import useImage from "use-image";
 
 type GridComponentProps = {
   layout: {
@@ -8,7 +9,7 @@ type GridComponentProps = {
     w: number;
     h: number;
   };
-  imageSrc: File;
+  imageSrc: string;
   opacity?: number;
 };
 
@@ -18,7 +19,7 @@ export default function GridElement({
   opacity,
 }: GridComponentProps) {
   const colors = ["#FFF230", "#13491cff", "#4d250fff"];
-  const { konvaImage } = useKonvaImage({ image: imageSrc });
+  const [konvaImage] = useImage(imageSrc);
 
   if (!konvaImage) return null;
 

@@ -36,7 +36,7 @@ export default function SelectableWrapper({
   }, [trRef, groupRef, isSelected]);
 
   const handleDragEnd = (e: Konva.KonvaEventObject<DragEvent>, id: string) => {
-    console.log("drag end", e);
+    console.log(elements);
     const newElements: ElementsNode[] = elements.map((el) =>
       el.id === id
         ? {
@@ -50,11 +50,16 @@ export default function SelectableWrapper({
     );
     dispatch(setElements(newElements));
   };
+
+  const element = elements.find((el) => el.id === id);
   return (
+    
     <>
       <Group
         ref={groupRef}
         draggable
+        x={element?.props.position?.x || 0}
+        y={element?.props.position?.y || 0}
         onTap={(e) => {
           e.cancelBubble = true;
           dispatch(setSelectedElementIds([id]));

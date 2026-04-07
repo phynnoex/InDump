@@ -4,7 +4,7 @@ import type { ElementsNode } from "../../types/elementType";
 type CollageStyle = "Grid" | "PostCard";
 
 interface CollageState {
-  images: File[];
+  images: string[];
   size: { width: number; height: number };
   collageStyle: CollageStyle;
   selectedElementIds: string[] | null;
@@ -34,7 +34,7 @@ const collageSlice = createSlice({
   initialState,
   name: "collage",
   reducers: {
-    setImage: (state, action: PayloadAction<File>) => {
+    setImage: (state, action: PayloadAction<string>) => {
       state.images.push(action.payload);
     },
     setSize: (
@@ -54,8 +54,11 @@ const collageSlice = createSlice({
       const current = state.elements.present;
       const next = action.payload;
 
+      // 🔥 DEEP CLONE (important)
+      const currentCopy = JSON.parse(JSON.stringify(current));
+
       //add the present to the past stack and next to the future stack
-      state.elements.past.push(current);
+      state.elements.past.push(currentCopy);
       state.elements.present = next;
       state.elements.future = [];
     },
@@ -71,7 +74,8 @@ const collageSlice = createSlice({
       }
 
       const previous = past.pop()!;
-      future.unshift(present);
+      const presentCopy = JSON.parse(JSON.stringify(present));
+      future.unshift(presentCopy);
       state.elements.present = previous;
     },
     redo: (state) => {
@@ -81,12 +85,21 @@ const collageSlice = createSlice({
         return;
       }
       const next = future.shift()!;
-      past.push(present);
+      const presentCopy = JSON.parse(JSON.stringify(present));
+      past.push(presentCopy);
       state.elements.present = next;
     },
   },
 });
 
-export const { setImage, setSize, setStyle, setSelectedElementIds, setElements, undo, redo, setIsInitialStyleSet } =
-  collageSlice.actions;
+export const {
+  setImage,
+  setSize,
+  setStyle,
+  setSelectedElementIds,
+  setElements,
+  undo,
+  redo,
+  setIsInitialStyleSet,
+} = collageSlice.actions;
 export default collageSlice.reducer;

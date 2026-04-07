@@ -20,7 +20,7 @@ export type TextElementProps = {
 } & ElementTransformProps;
 
 export type PostCardProps = {
-  image: File;
+  image: string;
   scale: number | 0;
   x: number | 0;
   y: number | 0;
@@ -36,7 +36,7 @@ export type RectElementProps = {
 export type ImageElementProps = {
   width: number;
   height: number;
-  imageSrc: File;
+  imageSrc: string;
 } & ElementTransformProps;
 
 export type StickerImageProps = {
@@ -52,7 +52,7 @@ type GridElementProps = {
     w: number;
     h: number;
   };
-  imageSrc: File;
+  imageSrc: string;
 } & ElementTransformProps;
 
 export type ElementsNode =

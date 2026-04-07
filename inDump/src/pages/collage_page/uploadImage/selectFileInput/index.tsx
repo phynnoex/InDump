@@ -5,14 +5,14 @@ import { setImage } from "../../../../state/collage/collageSlice";
 import { useDispatch } from "react-redux";
 import { type AppDispatch } from "../../../../state/store";
 type SelectFileInputProps = {
-  images?: File[];
+  images?: string[];
 };
 export default function SelectFileInput({ images }: SelectFileInputProps) {
   const dispatch = useDispatch<AppDispatch>();
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles: File[] = Array.from(event.target.files || []);
     newFiles.forEach((file) => {
-      dispatch(setImage(file));
+      dispatch(setImage(URL.createObjectURL(file)));
     });
   };
   return (

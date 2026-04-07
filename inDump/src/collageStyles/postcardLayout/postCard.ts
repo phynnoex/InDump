@@ -10,8 +10,8 @@ type RawPointsType = {
 };
 
 export function PostCardLayout(
-  bgImage: File,
-  images: File[],
+  bgImage: string,
+  images: string[],
   canvasHeight: number,
   canvasWidth: number,
 ): ElementsNode[] {

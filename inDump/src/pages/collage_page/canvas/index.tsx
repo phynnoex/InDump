@@ -4,6 +4,7 @@ import {
   useState,
   Children,
   type ReactNode,
+  use,
 } from "react";
 import ButtonExport from "../../../components/button-export";
 import "./styles.scss";
@@ -38,11 +39,10 @@ export default function Canvas({ children }: CanvasProps) {
         });
       }
     }
+    updateSize();
     window.addEventListener("resize", updateSize);
     return () => window.removeEventListener("resize", updateSize);
-  }, [containerRef.current]);
-
-  
+  }, []);
 
   const scaleX = containerSize.w / size.width;
   const scaleY = containerSize.h / size.height;

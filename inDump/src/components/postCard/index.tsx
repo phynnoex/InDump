@@ -1,6 +1,7 @@
 import { Image, Rect, Group, Transformer } from "react-konva";
 import { useKonvaImage } from "../../hooks/useKonvaImage";
 import type { PostCardProps } from "../../types/elementType";
+import useImage from "use-image";
 
 export default function PostCard({
   image,
@@ -21,7 +22,7 @@ export default function PostCard({
   const childY = postcardPadding;
 
 
-  const { konvaImage } = useKonvaImage({ image: image });
+  const [konvaImage] = useImage(image);
 
   if (!konvaImage) return null;
 

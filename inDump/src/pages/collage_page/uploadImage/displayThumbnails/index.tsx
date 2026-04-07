@@ -1,7 +1,7 @@
 import "./styles.scss"
 
 type DisplayThumbnailsProps = {
-    images: File[]
+    images: string[]
 }
 
 export default function DisplayThumbnails({ images }: DisplayThumbnailsProps) {
@@ -11,7 +11,7 @@ export default function DisplayThumbnails({ images }: DisplayThumbnailsProps) {
             <div className="display-thumbnails_container">
                 {images.map((image, index) => (
                     <div key={index} className="thumbnail">
-                        <img src={URL.createObjectURL(image)} alt={`Thumbnail ${index + 1}`} />
+                        <img src={image} alt={`Thumbnail ${index + 1}`} />
                     </div>
                 ))}
             </div>
