@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../state/store";
 import { setElements } from "../../../state/collage/collageSlice";
 import type { ElementsNode } from "../../../types/elementType";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 
 type selectedLayerType = {
   id: string;
@@ -19,6 +20,7 @@ type PropertiesBarProps = {
 export default function PropertiesBar({ selectedLayer }: PropertiesBarProps) {
   const Elements = useSelector((state: RootState) => state.elements.present);
   const dispatch = useDispatch<AppDispatch>();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const updateElementOpacity = <T extends ElementsNode>(
     el: T,
@@ -119,11 +121,14 @@ export default function PropertiesBar({ selectedLayer }: PropertiesBarProps) {
 
   return (
     <div className="propertiesBar">
-      <h3>Properties</h3>
-      <div className="appearance-properties">
-        <h4>Appearance</h4>
+      {!isMobile && <h3>Properties</h3>}
+
+      <h4 className="prop-section-title">Appearance</h4>
+
+      {/* appearance properties */}
+      <div className="general-props-wrapper">
         <div className="inputs">
-          <label htmlFor="general-opacity" className="w-full">
+          <label htmlFor="general-opacity" className="w-full label-text">
             Opacity
             <br />
             <input
@@ -142,12 +147,14 @@ export default function PropertiesBar({ selectedLayer }: PropertiesBarProps) {
         </div>
       </div>
 
+      <div className="border-line"></div>
+
       {selectedElement?.type === "text" && (
         <>
           {" "}
-          <h4>Typography</h4>
+          <h4 className="prop-section-title">Typography</h4>
           <div className="inputs">
-            <label htmlFor="text-content" className="w-full">
+            <label htmlFor="text-content" className="w-full label-text">
               Content
               <br />
               <input
