@@ -1,5 +1,6 @@
 import FunctionsBar from "../functionsBar";
-import "./mobile.scss"
+import LayersBar from "../layersBar";
+import "./mobile.scss";
 
 export default function MobileMenuLayout() {
   return (
@@ -7,7 +8,9 @@ export default function MobileMenuLayout() {
       <div className="functions-bar">
         <FunctionsBar />
       </div>
-      <div className="layers-bar"></div>
+      <div className="layers-bar">
+        <LayersBar />
+      </div>
       <div className="properties-bar"></div>
     </div>
   );

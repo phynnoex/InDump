@@ -18,6 +18,8 @@ import {
   undo,
 } from "../../state/collage/collageSlice";
 import { useShortcut } from "../../hooks/useShortcut";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import LayersMobileBar from "./layersMobile";
 
 export default function LayersBar() {
   const selectedIds = useSelector(
@@ -26,6 +28,7 @@ export default function LayersBar() {
 
   const elements = useSelector((state: RootState) => state.elements.present);
   const dispatch = useDispatch<AppDispatch>();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const selectedLayers = selectedIds
     ? elements
@@ -91,7 +94,7 @@ export default function LayersBar() {
     }
   };
 
-  useShortcut("backspace", () => {
+  useShortcut("delete", () => {
     deleteLayer(selectedIds || []);
   });
 
@@ -119,62 +122,89 @@ export default function LayersBar() {
 
   return (
     <>
-      <div className="layersBar">
-        <h3>Layers</h3>
-        <div className="layers-display">
-          {elements
-            .slice()
-            .reverse()
-            .map((el) => (
-              <div
-                key={el.id}
-                className={`layer-item ${selectedIds && selectedIds.includes(el.id) ? "selected" : ""}`}
-                onClick={() => handleClickLayer(el.id)}
+      {!isMobile ? (
+        <>
+          <div className="layersBar">
+            <h3>Layers</h3>
+            <div className="layers-display">
+              {elements
+                .slice()
+                .reverse()
+                .map((el) => (
+                  <div
+                    key={el.id}
+                    className={`layer-item ${selectedIds && selectedIds.includes(el.id) ? "selected" : ""}`}
+                    onClick={() => handleClickLayer(el.id)}
+                  >
+                    {el.type} - {el.id}
+                  </div>
+                ))}
+            </div>
+            <div className="action-buttons">
+              <button className="add-layer-button">
+                <HugeiconsIcon
+                  icon={Cancel01FreeIcons}
+                  size={24}
+                  stroke="1.5"
+                />
+              </button>
+              <button
+                className="delete-layer-button"
+                onClick={() =>
+                  deleteLayer(selectedLayers.map((layer) => layer.id))
+                }
               >
-                {el.type} - {el.id}
-              </div>
-            ))}
-        </div>
-        <div className="action-buttons">
-          <button className="add-layer-button">
-            <HugeiconsIcon icon={Cancel01FreeIcons} size={24} stroke="1.5" />
-          </button>
-          <button
-            className="delete-layer-button"
-            onClick={() => deleteLayer(selectedLayers.map((layer) => layer.id))}
-          >
-            <HugeiconsIcon icon={Delete01FreeIcons} size={24} stroke="1.5" />
-          </button>
-          <button
-            className="duplicate-layer-button"
-            onClick={() =>
-              duplicateLayer(selectedLayers.map((layer) => layer.id))
-            }
-          >
-            <HugeiconsIcon icon={Copy01Icon} size={24} stroke="1.5" />
-          </button>
+                <HugeiconsIcon
+                  icon={Delete01FreeIcons}
+                  size={24}
+                  stroke="1.5"
+                />
+              </button>
+              <button
+                className="duplicate-layer-button"
+                onClick={() =>
+                  duplicateLayer(selectedLayers.map((layer) => layer.id))
+                }
+              >
+                <HugeiconsIcon icon={Copy01Icon} size={24} stroke="1.5" />
+              </button>
 
-          <button
-            className="moveForward-layer-button"
-            onClick={() =>
-              MoveLayerForward(selectedLayers[selectedLayers.length - 1].id)
-            }
-          >
-            <HugeiconsIcon icon={ArrowUpIcon} size={24} stroke="1.5" />
-          </button>
-          <button
-            className="moveBackward-layer-button"
-            onClick={() =>
-              MoveLayerBackward(selectedLayers[selectedLayers.length - 1].id)
-            }
-          >
-            <HugeiconsIcon icon={ArrowDownIcon} size={24} stroke="1.5" />
-          </button>
-        </div>
-      </div>
-      <PropertiesBar
-        selectedLayer={selectedLayers[selectedLayers.length - 1]}
-      />
+              <button
+                className="moveForward-layer-button"
+                onClick={() =>
+                  MoveLayerForward(selectedLayers[selectedLayers.length - 1].id)
+                }
+              >
+                <HugeiconsIcon icon={ArrowUpIcon} size={24} stroke="1.5" />
+              </button>
+              <button
+                className="moveBackward-layer-button"
+                onClick={() =>
+                  MoveLayerBackward(
+                    selectedLayers[selectedLayers.length - 1].id,
+                  )
+                }
+              >
+                <HugeiconsIcon icon={ArrowDownIcon} size={24} stroke="1.5" />
+              </button>
+            </div>
+          </div>
+          <PropertiesBar
+            selectedLayer={selectedLayers[selectedLayers.length - 1]}
+          />
+        </>
+      ) : (
+        <LayersMobileBar
+          elements={elements}
+          selectedLayers={selectedLayers}
+          deleteLayer={deleteLayer}
+          duplicateLayer={duplicateLayer}
+          MoveLayerForward={MoveLayerForward}
+          MoveLayerBackward={MoveLayerBackward}
+          selectedIds={selectedIds}
+          handleClickLayer={handleClickLayer}
+        />
+      )}
     </>
   );
 }

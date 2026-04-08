@@ -1,7 +1,7 @@
 .mobile-menu-pop-up {
   max-width: 70vw;
   min-height: 120px;
-  overflow-y: auto;
+  
   max-height: 320px;
   height: max-content;
   position: absolute;
@@ -30,6 +30,7 @@
   &__content {
     padding: 8px 8px;
     box-sizing: border-box;
+    overflow-y: auto;
     width: 100%;
   }
 }
