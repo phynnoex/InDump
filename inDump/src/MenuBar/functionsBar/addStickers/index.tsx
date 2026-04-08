@@ -15,13 +15,24 @@ import { setElements } from "../../../state/collage/collageSlice";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import MobileMenuPopUp from "../../mobileMenuPopUp";
 
-export default function AddStickers() {
-  const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
+type AddStickersProps = {
+  dropdownVisibleID: string | null;
+  setDropdownVisible: React.Dispatch<React.SetStateAction<string | null>>;
+};
+
+export default function AddStickers({
+  dropdownVisibleID,
+  setDropdownVisible,
+}: AddStickersProps) {
   const Elements = useSelector((state: RootState) => state.elements.present);
   const dispatch = useDispatch<AppDispatch>();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const displayDropdownHandler = () => {
-    setDropdownVisible((prev) => !prev);
+    if (dropdownVisibleID === "sticker") {
+      setDropdownVisible(null);
+    } else {
+      setDropdownVisible("stickers");
+    }
   };
 
   const handleAddSticker = (image: string) => {
@@ -40,14 +51,17 @@ export default function AddStickers() {
   };
 
   return (
-    <div className="addStickers" onClick={displayDropdownHandler}>
+    <div
+      className={`addStickers ${dropdownVisibleID === "stickers" ? "active" : ""}`}
+      onClick={displayDropdownHandler}
+    >
       {!isMobile ? (
         <>
           <div className="dropDownWrapper">
             <div className="dropDownContainer">
               <HugeiconsIcon
                 icon={
-                  dropdownVisible === true
+                  dropdownVisibleID === "stickers"
                     ? ArrowDown01FreeIcons
                     : ArrowRight01FreeIcons
                 }
@@ -62,7 +76,7 @@ export default function AddStickers() {
               <div className="contentText">Add Sticker</div>
             </div>
           </div>
-          {dropdownVisible && (
+          {dropdownVisibleID === "stickers" && (
             <div className="stickersOptions">
               {stickers.map((sticker, index) => (
                 <div
@@ -83,22 +97,25 @@ export default function AddStickers() {
       ) : (
         <>
           <HugeiconsIcon icon={ImageIcon} size={24} stroke="1.5" />
-          {dropdownVisible && (
-            <MobileMenuPopUp  title="Add Sticker" setVisible={setDropdownVisible}>
+          {dropdownVisibleID === "stickers" && (
+            <MobileMenuPopUp
+              title="Add Sticker"
+              setVisibleId={setDropdownVisible}
+            >
               <div className="stickersWrapper">
-              {stickers.map((sticker, index) => (
-                <div
-                  key={index}
-                  className="stickerOption"
-                  onClick={() => handleAddSticker(sticker)}
-                >
-                  <img
-                    src={sticker}
-                    alt={`sticker-${index}`}
-                    className="stickerPreview"
-                  />
-                </div>
-              ))}
+                {stickers.map((sticker, index) => (
+                  <div
+                    key={index}
+                    className="stickerOption"
+                    onClick={() => handleAddSticker(sticker)}
+                  >
+                    <img
+                      src={sticker}
+                      alt={`sticker-${index}`}
+                      className="stickerPreview"
+                    />
+                  </div>
+                ))}
               </div>
             </MobileMenuPopUp>
           )}

@@ -14,10 +14,17 @@ import { setElements } from "../../../state/collage/collageSlice";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import MobileMenuPopUp from "../../mobileMenuPopUp";
 
-export default function AddPostCard() {
-  const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
+type AddPostCardProps = {
+  dropdownVisibleID: string | null;
+  setDropdownVisibleId: React.Dispatch<React.SetStateAction<string | null>>;
+};
+
+export default function AddPostCard({
+  dropdownVisibleID,
+  setDropdownVisibleId,
+}: AddPostCardProps) {
   const displayDropdownHandler = () => {
-    setDropdownVisible(true);
+    setDropdownVisibleId("postCard");
   };
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const Elements = useSelector((state: RootState) => state.elements.present);
@@ -37,18 +44,21 @@ export default function AddPostCard() {
       },
     };
     dispatch(setElements([...Elements, newPostCardElement]));
-    setDropdownVisible((prev) => !prev);
+    setDropdownVisibleId(null);
   };
 
   return (
-    <div className="addPostCard" onClick={displayDropdownHandler}>
+    <div
+      className={`addPostCard ${dropdownVisibleID === "postCard" ? "active" : ""}`}
+      onClick={displayDropdownHandler}
+    >
       {!isMobile ? (
         <>
           <div className="dropDownWrapper">
             <div className="dropDownContainer">
               <HugeiconsIcon
                 icon={
-                  dropdownVisible === true
+                  dropdownVisibleID === "postCard"
                     ? ArrowDown01FreeIcons
                     : ArrowRight01FreeIcons
                 }
@@ -63,7 +73,7 @@ export default function AddPostCard() {
               <div className="contentText">Add Post Card</div>
             </div>
           </div>
-          {dropdownVisible && (
+          {dropdownVisibleID === "postCard" && (
             <div className="postCardOptions">
               <label className="customFileInput">
                 <HugeiconsIcon
@@ -102,10 +112,10 @@ export default function AddPostCard() {
       ) : (
         <>
           <HugeiconsIcon icon={CardsIcon} size={24} stroke="1.5" />
-          {dropdownVisible && (
+          {dropdownVisibleID === "postCard" && (
             <MobileMenuPopUp
-              title="Add Sticker"
-              setVisible={setDropdownVisible}
+              title="Add Post Card"
+              setVisibleId={setDropdownVisibleId}
             >
               <label className="customFileInput">
                 <HugeiconsIcon

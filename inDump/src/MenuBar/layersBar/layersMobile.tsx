@@ -21,6 +21,8 @@ import { useDispatch } from "react-redux";
 import { redo, undo } from "../../state/collage/collageSlice";
 
 type LayersMobileBarProps = {
+  dropdownVisibleID: string | null;
+  setDropdownVisibleId: React.Dispatch<React.SetStateAction<string | null>>;
   elements: any[];
   selectedIds: string[] | null;
   handleClickLayer: (id: string) => void;
@@ -40,10 +42,15 @@ export default function LayersMobileBar({
   duplicateLayer,
   MoveLayerForward,
   MoveLayerBackward,
+  dropdownVisibleID,
+  setDropdownVisibleId,
 }: LayersMobileBarProps) {
-  const [dropDownVisible, setDropDownVisible] = useState(false);
   const displayDropDownHandler = () => {
-    setDropDownVisible((prev) => !prev);
+    if (dropdownVisibleID === "layers") {
+      setDropdownVisibleId(null);
+    } else {
+      setDropdownVisibleId("layers");
+    }
   };
   const dispatch = useDispatch<AppDispatch>();
 
@@ -52,8 +59,8 @@ export default function LayersMobileBar({
       <div className="layers-bar-mobile" onClick={displayDropDownHandler}>
         <HugeiconsIcon icon={LayersIcon} size={24} stroke="1.5" />
       </div>
-      {dropDownVisible && (
-        <MobileMenuPopUp title="Layers" setVisible={setDropDownVisible}>
+      {dropdownVisibleID === "layers" && (
+        <MobileMenuPopUp title="Layers" setVisibleId={setDropdownVisibleId}>
           <div className="mobile-layers-wrapper">
             <div className="layers-display">
               {elements

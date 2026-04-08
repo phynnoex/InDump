@@ -21,7 +21,12 @@ import { useShortcut } from "../../hooks/useShortcut";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import LayersMobileBar from "./layersMobile";
 
-export default function LayersBar() {
+type LayersBarProps = {
+  dropdownVisibleID: string | null;
+  setDropdownVisibleId: React.Dispatch<React.SetStateAction<string | null>>;
+};
+
+export default function LayersBar({ dropdownVisibleID, setDropdownVisibleId }: LayersBarProps) {
   const selectedIds = useSelector(
     (state: RootState) => state.selectedElementIds,
   );
@@ -195,6 +200,8 @@ export default function LayersBar() {
         </>
       ) : (
         <LayersMobileBar
+          dropdownVisibleID={dropdownVisibleID}
+          setDropdownVisibleId={setDropdownVisibleId}
           elements={elements}
           selectedLayers={selectedLayers}
           deleteLayer={deleteLayer}

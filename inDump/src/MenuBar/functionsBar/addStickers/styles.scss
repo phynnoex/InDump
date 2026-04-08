@@ -29,6 +29,10 @@
   flex-wrap: wrap;
   gap: 8px;
 }
+.active{
+  background-color: #5d5d5d;
+  border-radius: 4px;
+}
 
 //desktop layout
 @media screen and (min-width: 769px) {
