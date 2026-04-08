@@ -13,10 +13,6 @@ type PostCardProps = {
   canvasWidth: number;
   canvasHeight: number;
 };
-type fontObject = {
-  link: string;
-  fontFamily: string;
-};
 
 export default function PostCards({
   canvasHeight,
