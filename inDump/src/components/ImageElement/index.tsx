@@ -1,6 +1,6 @@
 import { Image } from "react-konva";
 import type { ImageElementProps } from "../../types/elementType";
-import { useKonvaImage } from "../../hooks/useKonvaImage";
+
 import useImage from "use-image";
 
 export default function ImageElement({

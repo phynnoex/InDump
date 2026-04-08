@@ -1,7 +1,5 @@
 import { useContext, useEffect } from "react";
-import ShortCutProvider, {
-  ShortcutContext,
-} from "../services/shortCutProvider";
+import { ShortcutContext } from "../services/shortCutProvider";
 
 export const useShortcut = (key: string, fn: () => void) => {
   const context = useContext(ShortcutContext);

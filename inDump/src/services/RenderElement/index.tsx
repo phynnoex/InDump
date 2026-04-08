@@ -1,4 +1,4 @@
-import { Rect } from "react-konva";
+
 import type { ElementsNode } from "../../types/elementType";
 import CustomText from "../../components/addText";
 import PostCard from "../../components/postCard";

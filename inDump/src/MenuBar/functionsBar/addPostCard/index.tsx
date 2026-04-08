@@ -19,7 +19,7 @@ export default function AddPostCard() {
   const displayDropdownHandler = () => {
     setDropdownVisible(true);
   };
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const Elements = useSelector((state: RootState) => state.elements.present);
   const dispatch = useDispatch<AppDispatch>();
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -29,7 +29,7 @@ export default function AddPostCard() {
       id: `postCard-${Date.now()}`,
       type: "postCard",
       props: {
-        image: selectedImage as File,
+        image: selectedImage ?? "",
         scale: 1,
         x: 50,
         y: 50,
@@ -78,8 +78,11 @@ export default function AddPostCard() {
                   onChange={(e) => {
                     const file = e.target.files?.[0];
                     if (file) {
-                      setSelectedImage(file);
-                      console.log(file);
+                      const reader = new FileReader();
+                      reader.onload = (e) => {
+                        setSelectedImage(e.target?.result as string);
+                      };
+                      reader.readAsDataURL(file);
                     }
                   }}
                 />
@@ -117,8 +120,11 @@ export default function AddPostCard() {
                   onChange={(e) => {
                     const file = e.target.files?.[0];
                     if (file) {
-                      setSelectedImage(file);
-                      console.log(file);
+                      const reader = new FileReader();
+                      reader.onload = (e) => {
+                        setSelectedImage(e.target?.result as string);
+                      };
+                      reader.readAsDataURL(file);
                     }
                   }}
                 />

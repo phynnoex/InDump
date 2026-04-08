@@ -1,5 +1,5 @@
-import { Image, Rect, Group, Transformer } from "react-konva";
-import { useKonvaImage } from "../../hooks/useKonvaImage";
+import { Image, Rect, Group} from "react-konva";
+
 import type { PostCardProps } from "../../types/elementType";
 import useImage from "use-image";
 

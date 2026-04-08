@@ -1,5 +1,4 @@
 import { Group, Image, Rect } from "react-konva";
-import { useKonvaImage } from "../../hooks/useKonvaImage";
 import useImage from "use-image";
 
 type GridComponentProps = {
