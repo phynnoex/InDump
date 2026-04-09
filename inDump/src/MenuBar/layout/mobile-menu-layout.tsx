@@ -1,18 +1,20 @@
-import { use, useState } from "react";
 import FunctionsBar from "../functionsBar";
 import LayersBar from "../layersBar";
 import "./mobile.scss";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Setting06Icon } from "@hugeicons/core-free-icons";
+import { Settings05Icon } from "@hugeicons/core-free-icons";
 import MobileMenuPopUp from "../mobileMenuPopUp";
 import PropertiesBar from "../layersBar/Properties";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../state/store";
 
-export default function MobileMenuLayout() {
-  const [dropdownVisibleID, setDropdownVisibleID] = useState<string | null>(
-    null,
-  );
+type MobileMenuLayoutProps = {
+  dropdownVisibleID: string | null;
+  setDropdownVisibleID: React.Dispatch<React.SetStateAction<string | null>>;
+};
+
+export default function MobileMenuLayout({ dropdownVisibleID, setDropdownVisibleID }: MobileMenuLayoutProps) {
+  
 
   const elements = useSelector((state: RootState) => state.elements.present);
   const selectedIds = useSelector(
@@ -46,10 +48,12 @@ export default function MobileMenuLayout() {
           setDropdownVisibleId={setDropdownVisibleID}
         />
       </div>
-      <div className="properties-bar">
+      <div
+        className={`properties-bar ${dropdownVisibleID === "properties" ? "active" : ""}`}
+      >
         <>
-          <div className="properties-button" onClick={showPropertiesHandler}>
-            <HugeiconsIcon icon={Setting06Icon} size={24} stroke="1.5" />
+          <div className={`properties-button `} onClick={showPropertiesHandler}>
+            <HugeiconsIcon icon={Settings05Icon} size={24} stroke="1.5" />
           </div>
           {dropdownVisibleID === "properties" ? (
             <MobileMenuPopUp

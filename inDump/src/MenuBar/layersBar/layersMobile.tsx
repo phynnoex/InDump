@@ -1,12 +1,9 @@
 import {
-  ArrowLeft01Icon,
-  ArrowRight01Icon,
   ArrowTurnBackwardIcon,
   ArrowTurnForwardIcon,
   LayersIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { useState } from "react";
 import MobileMenuPopUp from "../mobileMenuPopUp";
 import "./styles.scss";
 import {
@@ -56,7 +53,10 @@ export default function LayersMobileBar({
 
   return (
     <>
-      <div className="layers-bar-mobile" onClick={displayDropDownHandler}>
+      <div
+        className={`layers-bar-mobile ${dropdownVisibleID === "layers" ? "active" : ""}`}
+        onClick={displayDropDownHandler}
+      >
         <HugeiconsIcon icon={LayersIcon} size={24} stroke="1.5" />
       </div>
       {dropdownVisibleID === "layers" && (

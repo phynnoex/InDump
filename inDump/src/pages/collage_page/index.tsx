@@ -1,18 +1,11 @@
 import "./styles.scss";
-import Canvas from "./canvas";
-import React, { useEffect, useState } from "react";
-import UploadModal from "./uploadModal";
-import { AnimatePresence } from "framer-motion";
-import UploadImage from "./uploadImage";
-import SelectSize from "./uploadImage/selectSize";
-import SelectCollageStyle from "./uploadImage/selectCollageStyle";
+
+import { useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../state/store";
-import ModalAddButton from "../../components/modalAddButton";
-import RenderElement from "../../services/RenderElement";
 import { createGridElements } from "../../collageStyles/Grid";
 import { PostCardLayout } from "../../collageStyles/postcardLayout/postCard";
-import MenuBar from "../../MenuBar";
 import { setElements } from "../../state/collage/collageSlice";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import MobileLayout from "./layout/mobileLayout";

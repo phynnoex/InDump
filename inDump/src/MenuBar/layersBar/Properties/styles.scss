@@ -7,7 +7,6 @@
   width: 100%;
   box-sizing: border-box;
   overflow-y: auto;
-  scrollbar-width: thin;
   letter-spacing: -2%;
   color: rgba(255, 255, 255, 0.7);
   .inputs {
@@ -76,5 +75,10 @@
 @media (min-width: 768px) {
   .propertiesBar {
     border-top: 1px solid #555;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    box-sizing: border-box;
+    scrollbar-color: #555 transparent;
+    scrollbar-width: thin;
   }
 }

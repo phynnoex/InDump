@@ -1,12 +1,12 @@
 import Canvas from "../canvas";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { AnimatePresence } from "framer-motion";
 import UploadImage from "../uploadImage";
 import SelectSize from "../uploadImage/selectSize";
 import SelectCollageStyle from "../uploadImage/selectCollageStyle";
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../../state/store";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../../state/store";
 
 import UploadModal from "../uploadModal";
 import ModalAddButton from "../../../components/modalAddButton";

@@ -1,7 +1,7 @@
 import type React from "react";
 import "./styles.scss";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { CancelIcon, ImageIcon } from "@hugeicons/core-free-icons";
+import { CancelIcon } from "@hugeicons/core-free-icons";
 import { motion } from "framer-motion";
 
 type MobilePopUpProps = {

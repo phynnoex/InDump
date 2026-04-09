@@ -1,4 +1,4 @@
-import { Cancel01FreeIcons, ClosedCaptionIcon } from "@hugeicons/core-free-icons";
+import { Cancel01FreeIcons} from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import "./styles.scss";
 

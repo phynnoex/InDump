@@ -17,6 +17,8 @@
     width: 100%;
     height: 75%;
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #555 transparent;
     .selected {
       background-color: rgba(102, 102, 102, 0.5) !important;
       border: 2px solid rgba($color: #000000, $alpha: 0.4);
@@ -62,6 +64,10 @@
       border-radius: 4px;
     }
   }
+}
+
+.active{
+  background-color: #5d5d5d !important;
 }
 
 .layers-bar-mobile {

@@ -1,38 +1,33 @@
-import { HugeiconsIcon } from "@hugeicons/react"
-import "./styles.scss"
-import { Upload04Icon } from "@hugeicons/core-free-icons"
-import SelectFileInput from "./selectFileInput"
-import DisplayThumbnails from "./displayThumbnails"
+import { HugeiconsIcon } from "@hugeicons/react";
+import "./styles.scss";
+import { Upload04Icon } from "@hugeicons/core-free-icons";
+import SelectFileInput from "./selectFileInput";
+import DisplayThumbnails from "./displayThumbnails";
 
-import { useSelector } from "react-redux"
-import { type RootState } from "../../../state/store"
-
-
+import { useSelector } from "react-redux";
+import { type RootState } from "../../../state/store";
 
 export default function UploadImage() {
+  const images = useSelector((state: RootState) => state.images);
 
-    const images = useSelector((state: RootState) => state.images)
-
-    return (
-        <div className="upload-image">
-            <div className="upload-image_top">
-                <div className="selectImageContainer">
-                    <HugeiconsIcon
-                        icon={Upload04Icon}
-                        size={24}
-                        stroke="1.5"
-                    />
-
-                </div>
-                <div className="selectImageText"><h4>Select Image</h4><p>Select and upload pictures you want to collage</p></div>
-                <div className="selectImageDescription"></div>
-            </div>
-            <div className="upload-image_middle">
-                <SelectFileInput images={images} />
-            </div>
-            <div className="upload-image_bottom">
-                <DisplayThumbnails images={images} />
-            </div>
+  return (
+    <div className="upload-image">
+      <div className="upload-image_top">
+        <div className="selectImageContainer">
+          <HugeiconsIcon icon={Upload04Icon} size={24} stroke="1.5" />
         </div>
-    )
+        <div className="selectImageText">
+          <h4>Select Image</h4>
+          <p>Select and upload pictures you want to collage</p>
+        </div>
+        <div className="selectImageDescription"></div>
+      </div>
+      <div className="upload-image_middle">
+        <SelectFileInput />
+      </div>
+      <div className="upload-image_bottom">
+        <DisplayThumbnails images={images} />
+      </div>
+    </div>
+  );
 }

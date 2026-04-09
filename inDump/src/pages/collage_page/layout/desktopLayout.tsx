@@ -1,5 +1,5 @@
 import Canvas from "../canvas";
-import React, { useState } from "react";
+import React from "react";
 import UploadImage from "../uploadImage";
 import SelectSize from "../uploadImage/selectSize";
 import SelectCollageStyle from "../uploadImage/selectCollageStyle";
@@ -27,8 +27,6 @@ export default function DesktopLayout({
   collageOptions: collageOptions[];
   elements: ElementsNode[];
 }) {
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
-
   return (
     <>
       <div className="collagePage">
@@ -46,12 +44,7 @@ export default function DesktopLayout({
           <SelectCollageStyle
             collageOptions={collageOptions}
           ></SelectCollageStyle>
-          <button
-            className="collage-submit-button"
-            onClick={() => setIsButtonClicked(false)}
-          >
-            Generate Collage
-          </button>
+          <button className="collage-submit-button">Generate Collage</button>
         </div>
       </div>
     </>

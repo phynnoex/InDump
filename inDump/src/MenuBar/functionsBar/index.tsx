@@ -3,7 +3,6 @@ import "./styles.scss";
 import AddPostCard from "./addPostCard";
 import AddStickers from "./addStickers";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { useState } from "react";
 
 type FunctionsBarProps = {
   dropdownVisibleID: string | null;

@@ -4,10 +4,8 @@ import "./styles.scss";
 import { setImage } from "../../../../state/collage/collageSlice";
 import { useDispatch } from "react-redux";
 import { type AppDispatch } from "../../../../state/store";
-type SelectFileInputProps = {
-  images?: string[];
-};
-export default function SelectFileInput({ images }: SelectFileInputProps) {
+
+export default function SelectFileInput() {
   const dispatch = useDispatch<AppDispatch>();
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles: File[] = Array.from(event.target.files || []);

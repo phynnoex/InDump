@@ -7,7 +7,6 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react";
 import "./styles.scss";
 import type { ElementsNode } from "../../../types/elementType";
-import { useState } from "react";
 import stickers from "./stickers";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../state/store";

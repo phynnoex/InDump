@@ -1,21 +1,13 @@
-import {
-  useRef,
-  useLayoutEffect,
-  useState,
-  Children,
-  type ReactNode,
-  use,
-} from "react";
+import { useRef, useLayoutEffect, useState, type ReactNode } from "react";
 import ButtonExport from "../../../components/button-export";
 import "./styles.scss";
 
 import Artboard from "./artboard";
-import { Group, Layer, Rect, Text } from "react-konva";
+import { Group, Layer, Rect } from "react-konva";
 import type Konva from "konva";
 
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../../state/store";
-import { setSize } from "../../../state/collage/collageSlice";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../../state/store";
 
 interface CanvasProps {
   children: ReactNode;
@@ -27,7 +19,6 @@ export default function Canvas({ children }: CanvasProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const ArtboardRef = useRef<{ getStage: () => Konva.Stage | null }>(null);
   const [containerSize, setContainerSize] = useState({ w: 0, h: 0 });
-  const dispatch = useDispatch<AppDispatch>();
 
   // change container size on window resize
   useLayoutEffect(() => {
