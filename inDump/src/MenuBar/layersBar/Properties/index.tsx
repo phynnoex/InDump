@@ -126,25 +126,49 @@ export default function PropertiesBar({ selectedLayer }: PropertiesBarProps) {
       <h4 className="prop-section-title">Appearance</h4>
 
       {/* appearance properties */}
-      <div className="general-props-wrapper">
-        <div className="inputs">
-          <label htmlFor="general-opacity" className="w-full label-text">
-            Opacity
-            <br />
-            <input
-              className="input-field"
-              type="number"
-              id="general-opacity"
-              name="general-opacity"
-              placeholder="Opacity"
-              min={0}
-              max={1}
-              step={0.1}
-              onChange={handlePropertyChange}
-              value={selectedElement?.props.opacity ?? 1}
-            />
-          </label>
-        </div>
+
+      <div className="inputs ">
+        <label htmlFor="general-opacity" className=" label-text small-input">
+          Opacity
+          <br />
+          <input
+            className="input-field"
+            type="number"
+            id="general-opacity"
+            name="general-opacity"
+            placeholder="Opacity"
+            min={0}
+            max={1}
+            step={0.1}
+            onChange={handlePropertyChange}
+            value={selectedElement?.props.opacity ?? 1}
+          />
+        </label>
+        <label htmlFor="position-x" className=" label-text small-input">
+          Position X
+          <br />
+          <input
+            className="input-field"
+            type="number"
+            id="position-x"
+            name="position-x"
+            placeholder="Position X"
+            disabled
+            value={selectedElement?.props.position?.x?.toFixed(2) ?? 0}
+          />
+        </label>
+        <label htmlFor="position-y" className="label-text small-input">
+          <br />
+          <input
+            className="input-field"
+            type="number"
+            id="position-y"
+            name="position-y"
+            placeholder="Position Y"
+            disabled
+            value={selectedElement?.props.position?.y?.toFixed(2) ?? 0}
+          />
+        </label>
       </div>
 
       <div className="border-line"></div>
@@ -167,7 +191,7 @@ export default function PropertiesBar({ selectedLayer }: PropertiesBarProps) {
                 value={selectedElement?.props.text ?? ""}
               />
             </label>
-            <label htmlFor="font-family" className="w-full">
+            <label htmlFor="font-family" className="w-full label-text">
               Font Family
               <br />
               <select
@@ -184,7 +208,7 @@ export default function PropertiesBar({ selectedLayer }: PropertiesBarProps) {
                 ))}
               </select>
             </label>
-            <label htmlFor="text-size" className="w-half">
+            <label htmlFor="text-size" className="w-half label-text">
               Fontsize
               <br />
               <input
@@ -198,7 +222,7 @@ export default function PropertiesBar({ selectedLayer }: PropertiesBarProps) {
                 value={selectedElement?.props.size ?? 12}
               />
             </label>
-            <label htmlFor="text-color" className="w-half">
+            <label htmlFor="text-color" className="w-half label-text">
               Text Color
               <br />
               <input
